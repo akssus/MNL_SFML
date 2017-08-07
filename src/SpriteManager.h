@@ -5,36 +5,33 @@
 #include <string>
 #include "SFML/Graphics.hpp"
 
-class SpriteManager 
-{
-public:
-	~SpriteManager();
-private:
-	SpriteManager();
 
-public:
-	static SpriteManager* getInstance()
+namespace MNL {
+
+	class SpriteManager
 	{
-		if (m_pInstance == nullptr)
-		{
-			m_pInstance = new SpriteManager();
-		}
-		return m_pInstance;
+	public:
+		~SpriteManager();
+	private:
+		SpriteManager();
+
+	public:
+		static SpriteManager* getInstance();
+		sf::Sprite		createSprite(std::wstring imageFileName);
+
+	private:
+		void			freeInstance();
+		sf::Texture*	getTexture(std::wstring imageFileName);
+		bool			loadTextureFromLocalPath(std::wstring localFilePath);
+		bool			loadTextureFromPackage(std::wstring imageFileName);
+
+	private:
+		static SpriteManager* m_pInstance;
+		std::map<std::wstring, std::shared_ptr<sf::Texture> > m_textureTable;
+
 	};
-	sf::Sprite createSprite(std::string imageFilePath);
 
-private:
-	void freeInstance();
-
-public:
-	
-
-private:
-	static SpriteManager* m_pInstance;
-	std::map<std::string, std::shared_ptr<sf::Texture> > m_textureTable;
-
-};
-
+}
 
 
 #endif
