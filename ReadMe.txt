@@ -1,1 +1,1 @@
-﻿dependence : SFML
+﻿dependence : SFML, zip_utils, nlohmann's json library

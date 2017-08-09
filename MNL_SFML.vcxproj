@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\SpriteManager.cpp" />
     <ClCompile Include="src\zip_utils\unzip.cpp" />
     <ClCompile Include="src\zip_utils\zip.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="src\jsonnlohmann\json.hpp" />
     <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\ResourceManager.h" />
+    <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\SpriteManager.h" />
     <ClInclude Include="src\zip_utils\unzip.h" />
     <ClInclude Include="src\zip_utils\zip.h" />
