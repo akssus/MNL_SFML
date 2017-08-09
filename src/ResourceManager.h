@@ -23,6 +23,7 @@ namespace MNL
 		static ResourceManager*		getInstance();
 		bool						loadResourcePackage(std::wstring packageFilePath);
 		const Resource*				getResource(std::wstring keyName);
+		void						destroyResource(std::wstring keyName);
 
 	private:
 		void						clearResourceTable();

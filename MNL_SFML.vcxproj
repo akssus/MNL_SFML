@@ -77,14 +77,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SFML_DIR)\include;$(SFML_THOR_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>sfml-graphics-d.lib	;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib	;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;sfml-network-s-d.lib;thor-d.lib;sfml-main-d.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SFML_DIR)\lib;$(SFML_THOR_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -145,12 +145,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\SpriteManager.cpp" />
     <ClCompile Include="src\zip_utils\unzip.cpp" />
     <ClCompile Include="src\zip_utils\zip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\jsonnlohmann\json.hpp" />
+    <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\SpriteManager.h" />
     <ClInclude Include="src\zip_utils\unzip.h" />

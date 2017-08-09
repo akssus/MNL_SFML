@@ -48,7 +48,7 @@ bool ResourceManager::loadResourcePackage(std::wstring packageFilePath)
 //returns null if resource is not exist
 const Resource* ResourceManager::getResource(std::wstring keyName)
 {
-	return &m_resourceTable[keyName];
+	return (m_resourceTable.count(keyName) == 0) ? nullptr : &m_resourceTable[keyName];
 }
 
 void ResourceManager::clearResourceTable()
@@ -59,4 +59,15 @@ void ResourceManager::clearResourceTable()
 			delete resPair.second._memBuffer;
 	}
 	m_resourceTable.clear();
+}
+
+//destroy resource and recover memory
+void ResourceManager::destroyResource(std::wstring keyName)
+{
+	if (m_resourceTable.count(keyName) != 0)
+	{
+		if(m_resourceTable[keyName]._memBuffer != nullptr)
+			delete m_resourceTable[keyName]._memBuffer;
+		m_resourceTable.erase(keyName);
+	}
 }

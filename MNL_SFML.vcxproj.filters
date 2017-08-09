@@ -16,35 +16,50 @@
     <Filter Include="외부라이브러리">
       <UniqueIdentifier>{b3074d0f-dac2-4ba8-aa89-9c4f0131c09f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="외부라이브러리\zip_utils">
+      <UniqueIdentifier>{d327872d-1ce7-4da9-b9b1-734ef84ba97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="외부라이브러리\jsonnlohmann">
+      <UniqueIdentifier>{fc9b9733-16bd-40d4-87d4-2e2394bddebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\zip_utils\unzip.cpp">
-      <Filter>외부라이브러리</Filter>
-    </ClCompile>
-    <ClCompile Include="src\zip_utils\zip.cpp">
-      <Filter>외부라이브러리</Filter>
-    </ClCompile>
     <ClCompile Include="src\ResourceManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\SpriteManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\zip_utils\unzip.cpp">
+      <Filter>외부라이브러리\zip_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\zip_utils\zip.cpp">
+      <Filter>외부라이브러리\zip_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimatedSprite.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\zip_utils\unzip.h">
-      <Filter>외부라이브러리</Filter>
-    </ClInclude>
-    <ClInclude Include="src\zip_utils\zip.h">
-      <Filter>외부라이브러리</Filter>
-    </ClInclude>
     <ClInclude Include="src\SpriteManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\zip_utils\unzip.h">
+      <Filter>외부라이브러리\zip_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\zip_utils\zip.h">
+      <Filter>외부라이브러리\zip_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\jsonnlohmann\json.hpp">
+      <Filter>외부라이브러리\jsonnlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatedSprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
