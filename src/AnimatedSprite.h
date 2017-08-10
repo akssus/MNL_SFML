@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include "SFML/Graphics.hpp"
-#include "ResourceManager.h"
 #include "SpriteManager.h"
 
 namespace MNL
