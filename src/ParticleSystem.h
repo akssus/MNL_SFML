@@ -67,7 +67,7 @@ namespace MNL
 
 	private:
 		void			clearParticles();
-		void			remove_if(std::function<void(Particle&)> conditionFunc);
+		void			remove_if(std::function<bool(Particle&)> conditionFunc);
 
 		/* emitter describes when creating a particle, defines initial parameters of the particle */
 		std::function<void(ParticleSystem&, ParticleDescription&)>	m_funEmitter;

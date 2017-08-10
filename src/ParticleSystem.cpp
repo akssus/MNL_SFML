@@ -53,7 +53,7 @@ sf::Vector2f ParticleSystem::getPosition()
 {
 	return m_pos;
 }
-void ParticleSystem::remove_if(std::function<void(Particle&)> conditionFunc)
+void ParticleSystem::remove_if(std::function<bool(Particle&)> conditionFunc)
 {
 	std::remove_if(m_particleQueue.begin(), m_particleQueue.end(), conditionFunc);
 }
