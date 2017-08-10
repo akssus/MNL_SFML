@@ -11,7 +11,7 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
-	clearResourceTable();
+	freeInstance();
 }
 ResourceManager* ResourceManager::getInstance()
 {
@@ -21,6 +21,11 @@ ResourceManager* ResourceManager::getInstance()
 	}
 	return m_pInstance;
 };
+void ResourceManager::freeInstance()
+{
+	clearResourceTable();
+	m_pInstance = nullptr;
+}
 
 bool ResourceManager::loadResourcePackage(std::wstring packageFilePath)
 {
@@ -45,7 +50,6 @@ bool ResourceManager::loadResourcePackage(std::wstring packageFilePath)
 	return true;
 }
 
-//returns null if resource is not exist
 const Resource* ResourceManager::getResource(std::wstring keyName)
 {
 	return (m_resourceTable.count(keyName) == 0) ? nullptr : &m_resourceTable[keyName];
@@ -61,7 +65,6 @@ void ResourceManager::clearResourceTable()
 	m_resourceTable.clear();
 }
 
-//destroy resource and recover memory
 void ResourceManager::destroyResource(std::wstring keyName)
 {
 	if (m_resourceTable.count(keyName) != 0)

@@ -22,7 +22,17 @@ SoundManager* SoundManager::getInstance()
 	}
 	return m_pInstance;
 }
+void SoundManager::freeInstance()
+{
+	m_musicTable.clear();
+	m_soundBufferTable.clear();
+	m_soundQueue.clear();
+	m_pCurrentMusic = nullptr;
 
+	if (m_pInstance != nullptr)
+		delete m_pInstance;
+	m_pInstance = nullptr;
+}
 void SoundManager::playSFX(std::wstring sfxFileName)
 {
 	sf::SoundBuffer* pSoundBuffer = getSoundBuffer(sfxFileName);

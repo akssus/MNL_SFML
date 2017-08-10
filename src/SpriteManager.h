@@ -20,10 +20,9 @@ namespace MNL {
 
 	class SpriteManager
 	{
-	public:
-		~SpriteManager();
 	private:
 		SpriteManager();
+		~SpriteManager();
 
 	public:
 		static SpriteManager*	getInstance();

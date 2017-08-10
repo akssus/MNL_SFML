@@ -16,6 +16,8 @@ namespace MNL
 
 	public:
 		static SoundManager*	getInstance();
+		void					freeInstance();
+
 		void	playSFX(std::wstring sfxFileName);
 		void	playMusic(std::wstring musicFileName);
 		void	stopMusic();
