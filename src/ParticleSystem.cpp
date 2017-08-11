@@ -17,27 +17,27 @@ void ParticleSystem::initSystem(ParticleDescription& desc)
 {
 	m_particleDescription = desc;
 	m_systemDuration = desc._systemDuration;
-	m_funAffector	= defaultAffector;
-	m_funEmitter	= defaultEmitter;
-	m_funRemover	= defaultRemover;
-	m_funRenderer	= defaultRenderer;
+	m_fucAffector	= defaultAffector;
+	m_fucEmitter	= defaultEmitter;
+	m_fucRemover	= defaultRemover;
+	m_fucRenderer	= defaultRenderer;
 	m_isInitialized = true;
 }
 void ParticleSystem::setEmitter(std::function<void(ParticleSystem&, ParticleDescription&)>& emitter)
 {
-	m_funEmitter = emitter;
+	m_fucEmitter = emitter;
 }
 void ParticleSystem::setRemover(std::function<bool(Particle&)>& remover)
 {
-	m_funRemover = remover;
+	m_fucRemover = remover;
 }
 void ParticleSystem::setAffector(std::function<void(Particle&)>& affector)
 {
-	m_funAffector = affector;
+	m_fucAffector = affector;
 }
 void ParticleSystem::setRenderer(std::function<void(Particle&, sf::RenderWindow&)>& renderer)
 {
-	m_funRenderer = renderer;
+	m_fucRenderer = renderer;
 }
 
 void ParticleSystem::addParticle(Particle& particle)
@@ -78,14 +78,14 @@ void ParticleSystem::update()
 {
 	if (!m_isInitialized) return;
 	//remove finished particles
-	remove_if(m_funRemover);
+	remove_if(m_fucRemover);
 
 	ParticleDescription& pd = m_particleDescription;
 
 	//update the particles
 	for (auto& particle : m_particleQueue)
 	{
-		m_funAffector(particle);
+		m_fucAffector(particle);
 	}
 
 	//if it doesn't stop,then emit particles
@@ -94,7 +94,7 @@ void ParticleSystem::update()
 		//it can be create more than 2 particles at the same time
 		while (m_emitCounter < pd._emitFrequency)
 		{
-			m_funEmitter(*this, m_particleDescription);
+			m_fucEmitter(*this, m_particleDescription);
 			m_emitCounter -= pd._emitFrequency;
 		}
 
@@ -118,7 +118,7 @@ void ParticleSystem::render(sf::RenderWindow& window)
 {
 	for (auto& particle : m_particleQueue)
 	{
-		m_funRenderer(particle,window);
+		m_fucRenderer(particle,window);
 	}
 }
 

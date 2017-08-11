@@ -72,16 +72,16 @@ namespace MNL
 		void			remove_if(std::function<bool(Particle&)> conditionFunc);
 
 		/* emitter describes when creating a particle, defines initial parameters of the particle */
-		std::function<void(ParticleSystem&, ParticleDescription&)>	m_funEmitter;
+		std::function<void(ParticleSystem&, ParticleDescription&)>	m_fucEmitter;
 
 		/* remover determine whether a particle should be destroyed or not. return true when it should be destroyed */
-		std::function<bool(Particle&)>	m_funRemover;
+		std::function<bool(Particle&)>	m_fucRemover;
 
 		/* affector define how a particle moves when update particle system */
-		std::function<void(Particle&)>	m_funAffector;
+		std::function<void(Particle&)>	m_fucAffector;
 
 		/* renderer renders a particle */
-		std::function<void(Particle&,sf::RenderWindow&)>	m_funRenderer;
+		std::function<void(Particle&,sf::RenderWindow&)>	m_fucRenderer;
 
 	public:
 		bool				m_isAlive = true;
