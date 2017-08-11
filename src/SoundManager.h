@@ -25,8 +25,8 @@ namespace MNL
 
 		void	update();
 
-		bool				loadSFXFromPackage(std::wstring sfxFileName);
-		bool				loadMusicFromPackage(std::wstring musicFileName);
+		bool	loadSFXFromPackage(std::wstring sfxFileName);
+		bool	loadMusicFromPackage(std::wstring musicFileName);
 
 	private:
 		sf::SoundBuffer*	getSoundBuffer(std::wstring sfxFileName);
