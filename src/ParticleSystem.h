@@ -13,6 +13,7 @@ namespace MNL
 	{
 		std::wstring	_particleTextureName;
 		int				_emitFrequency = 0;				//how often particles created
+		int				_systemDuration = 0;			//how long a particle system lives. 0 means infinite
 		sf::Vector2f	_emitPositionRandomness;		//randomly emitting offset
 		int				_emitDuration = 0;				//how long do a particle lives
 		int				_emitDurationRandomness = 0;	//variation of duration, +-randomness
@@ -23,6 +24,7 @@ namespace MNL
 		float			_scaleEnd	= 1.0f;
 		float			_angleStart	= 0.0f;
 		float			_angleEnd	= 0.0f;
+		int				_blendMode	= 0;
 	};
 
 	struct Particle
@@ -81,6 +83,8 @@ namespace MNL
 		/* renderer renders a particle */
 		std::function<void(Particle&,sf::RenderWindow&)>	m_funRenderer;
 
+	public:
+		bool				m_isAlive = true;
 	private:
 		sf::Vector2f		m_pos;
 		std::list<Particle> m_particleQueue;
@@ -88,8 +92,9 @@ namespace MNL
 		int					m_emitCounter = 0;
 		bool				m_isInitialized = false;
 		bool				m_isEmitting = true;
-		bool				m_colorMode = false;
-
+		int					m_systemDuration = 0;
+		int					m_systemCounter = 0;
+		sf::BlendMode		m_blendMode;
 	};
 
 	void defaultEmitter(ParticleSystem& ps, ParticleDescription& pd);

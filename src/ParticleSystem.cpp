@@ -16,6 +16,7 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::initSystem(ParticleDescription& desc)
 {
 	m_particleDescription = desc;
+	m_systemDuration = desc._systemDuration;
 	m_funAffector	= defaultAffector;
 	m_funEmitter	= defaultEmitter;
 	m_funRemover	= defaultRemover;
@@ -81,20 +82,36 @@ void ParticleSystem::update()
 
 	ParticleDescription& pd = m_particleDescription;
 
+	//update the particles
 	for (auto& particle : m_particleQueue)
 	{
 		m_funAffector(particle);
 	}
 
+	//if it doesn't stop,then emit particles
 	if (m_isEmitting)
 	{
-		if (m_emitCounter > pd._emitFrequency)
+		//it can be create more than 2 particles at the same time
+		while (m_emitCounter < pd._emitFrequency)
 		{
 			m_funEmitter(*this, m_particleDescription);
-			m_emitCounter = 0;
+			m_emitCounter -= pd._emitFrequency;
 		}
 
 		m_emitCounter++;
+	}
+
+	if (m_isAlive)
+	{
+		if (m_systemDuration != 0)
+		{
+			if (m_systemCounter > m_systemDuration)
+			{
+				m_isAlive = false;
+				m_isEmitting = false;
+			}
+			m_systemCounter++;
+		}
 	}
 }
 void ParticleSystem::render(sf::RenderWindow& window)
