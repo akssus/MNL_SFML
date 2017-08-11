@@ -77,6 +77,8 @@ void ParticleSystem::pause()
 void ParticleSystem::update()
 {
 	if (!m_isInitialized) return;
+	if (!m_isAlive) return;
+
 	//remove finished particles
 	remove_if(m_fucRemover);
 
