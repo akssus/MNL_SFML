@@ -77,7 +77,6 @@ void ParticleSystem::pause()
 void ParticleSystem::update()
 {
 	if (!m_isInitialized) return;
-	if (!m_isAlive) return;
 
 	//remove finished particles
 	remove_if(m_fucRemover);
@@ -91,7 +90,7 @@ void ParticleSystem::update()
 	}
 
 	//if it doesn't stop,then emit particles
-	if (m_isEmitting)
+	if (m_isEmitting && m_isAlive)
 	{
 		//it can be create more than 2 particles at the same time
 		while (m_emitCounter < pd._emitFrequency)
