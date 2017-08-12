@@ -70,7 +70,7 @@ sf::Texture* SpriteManager::getTexture(std::wstring imageFileName)
 		//if not exist then try to load from memory
 		if (loadTextureFromPackage(imageFileName) == false)
 		{
-			if (loadTextureFromLocalPath(TCHAR("res/") + imageFileName) == false)
+			if (loadTextureFromLocalPath(imageFileName) == false)
 			{
 				//load failed
 				textureLoadSuccess = false;
@@ -107,6 +107,7 @@ bool SpriteManager::loadTextureFromLocalPath(std::wstring localFilePath)
 			newTexture = nullptr;
 			//or return as default texture
 		}
+		m_textureTable[localFilePath] = std::shared_ptr<sf::Texture>(newTexture);
 	}
 	return true;
 }

@@ -27,11 +27,11 @@ namespace MNL {
 	public:
 		static SpriteManager*	getInstance();
 		sf::Sprite				createSprite(std::wstring imageFileName);
+		sf::Texture*			getTexture(std::wstring imageFileName);
 		AnimationFrameList*		getFrameList(std::wstring jsonFileName);
 
 	private:
 		void			freeInstance();
-		sf::Texture*	getTexture(std::wstring imageFileName);
 
 		bool			loadTextureFromLocalPath(std::wstring localFilePath);
 		bool			loadTextureFromPackage(std::wstring imageFileName);
