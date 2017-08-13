@@ -150,7 +150,7 @@ bool SpriteManager::loadSheetDataFromJson(std::wstring jsonFileName)
 		//parser does implicit conversion
 		frame._index = index++;
 		frame._duration = element["duration"];
-		frame._duration /= 60.0f; //to per frames
+		frame._duration *= 60.0f/1000.0f; //to per frames
 		sf::IntRect rect;
 		rect.left = element["frame"]["x"];
 		rect.top = element["frame"]["y"];
