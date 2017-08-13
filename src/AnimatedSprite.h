@@ -18,16 +18,19 @@ namespace MNL
 
 		void setSpriteSheet(std::wstring imageFileName);
 		bool setSheetData(std::wstring jsonFileName);
-
 		void setCurrentFrame(int index);
+		void setLoop(bool isLoop);
+
 		void gotoNextFrame();
 		void stop();
 		void pause();
 		void play();
 
+		bool isAtLastFrame();
+
 		void update();
 		void render(sf::RenderWindow& window);
-
+		
 	private:
 		AnimationFrameList				m_lstFrames;
 		int								m_numFrames			= 0;
@@ -35,5 +38,6 @@ namespace MNL
 		sf::Sprite						m_spriteSheet;
 		int								m_frameCounter		= 0;
 		bool							m_isPlaying			= true;
+		bool							m_isLoop			= true;
 	};
 }

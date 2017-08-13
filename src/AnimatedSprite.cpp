@@ -28,7 +28,10 @@ bool AnimatedSprite::setSheetData(std::wstring jsonFileName)
 	setCurrentFrame(0);
 	return true;
 }
-
+void AnimatedSprite::setLoop(bool isLoop)
+{
+	m_isLoop = isLoop;
+}
 void AnimatedSprite::setCurrentFrame(int index)
 {
 	if (index >= 0 && index < m_numFrames)
@@ -65,6 +68,11 @@ void AnimatedSprite::play()
 	m_isPlaying = true;
 }
 
+bool AnimatedSprite::isAtLastFrame()
+{
+	return (m_pCurrentFrame->_index == m_numFrames - 1);
+}
+
 void AnimatedSprite::update()
 {
 	if (m_pCurrentFrame == nullptr) return;
@@ -76,6 +84,11 @@ void AnimatedSprite::update()
 			gotoNextFrame();
 			m_frameCounter = 0;
 		}
+	}
+	//if sprite not loops, then stop at last frame
+	if (m_isLoop == false)
+	{
+		if (isAtLastFrame()) m_isPlaying = false;
 	}
 }
 
