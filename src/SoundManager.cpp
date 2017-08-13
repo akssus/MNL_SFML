@@ -115,8 +115,9 @@ bool SoundManager::loadMusicFromPackage(std::wstring musicFileName)
 void SoundManager::update()
 {
 	//remove already played sfx
-	std::remove_if(m_soundQueue.begin(),m_soundQueue.end(),[](std::shared_ptr<sf::Sound> pSound){
+	auto& it = std::remove_if(m_soundQueue.begin(),m_soundQueue.end(),[](std::shared_ptr<sf::Sound> pSound){
 		if (pSound->getStatus() == sf::Sound::Stopped) return true;
 		return false;
 	});
+	m_soundQueue.erase(it, m_soundQueue.end());
 }

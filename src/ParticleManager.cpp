@@ -67,12 +67,13 @@ void ParticleManager::update()
 		particleSystem.update();
 	}
 	//remove finished particle system
-	std::remove_if(m_particleSystemQueue.begin(), m_particleSystemQueue.end(), 
+	auto& it = std::remove_if(m_particleSystemQueue.begin(), m_particleSystemQueue.end(), 
 		[](ParticleSystem& ps) { 
 			if (!ps.m_isAlive) return true; 
 			return false;
 		}
 	);
+	m_particleSystemQueue.erase(it, m_particleSystemQueue.end());
 }
 void ParticleManager::render(sf::RenderWindow& window)
 {
