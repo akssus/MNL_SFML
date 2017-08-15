@@ -25,13 +25,17 @@ namespace MNL
 		void stop();
 		void pause();
 		void play();
+		void rewind();
 
 		bool isAtLastFrame();
+		bool isPlaying();
 
 		void update();
 		void render(sf::RenderWindow& window);
 		
 	private:
+		sf::Clock						m_clock;
+		sf::Time						m_extraTime;
 		AnimationFrameList				m_lstFrames;
 		int								m_numFrames			= 0;
 		AnimationFrame*					m_pCurrentFrame		= nullptr;
@@ -39,5 +43,6 @@ namespace MNL
 		int								m_frameCounter		= 0;
 		bool							m_isPlaying			= true;
 		bool							m_isLoop			= true;
+		bool							m_loopMutex			= false;
 	};
 }

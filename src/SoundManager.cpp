@@ -51,6 +51,7 @@ void SoundManager::playMusic(std::wstring musicFileName)
 	//stop already being played music
 	if (m_pCurrentMusic != nullptr) m_pCurrentMusic->stop();
 	m_pCurrentMusic = pMusic;
+	m_pCurrentMusic->setLoop(true);
 	m_pCurrentMusic->play();
 }
 void SoundManager::stopMusic()
