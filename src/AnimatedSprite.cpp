@@ -18,28 +18,28 @@ AnimatedSprite::~AnimatedSprite()
 set animation sprite sheet from image file
 @param imageFileName : sprite sheet file name in the pacakge or local path. png, bmp, etc.
 */
-void AnimatedSprite::setSpriteSheet(std::wstring imageFileName)
+void AnimatedSprite::SetSpriteSheet(std::wstring imageFileName)
 {
-	m_spriteSheet = SpriteManager::getInstance()->createSprite(imageFileName);
+	m_spriteSheet = SpriteManager::GetInstance()->CreateSprite(imageFileName);
 }
 
 /*
 read animation frame data from json
 @param jsonFileName : json file name in the package or local path. it should contain string .json
 */
-bool AnimatedSprite::setSheetData(std::wstring jsonFileName)
+bool AnimatedSprite::SetSheetData(std::wstring jsonFileName)
 {
-	AnimationFrameList* loadedFrames = SpriteManager::getInstance()->getFrameList(jsonFileName);
+	AnimationFrameList* loadedFrames = SpriteManager::GetInstance()->GetFrameList(jsonFileName);
 	if (loadedFrames == nullptr) return false; //json file doesn't exit
 	m_lstFrames = *loadedFrames; //copy
 	m_numFrames = m_lstFrames.size();
-	setCurrentFrame(0);
+	SetCurrentFrame(0);
 	return true;
 }
 /*
 set loop or not
 */
-void AnimatedSprite::setLoop(bool isLoop)
+void AnimatedSprite::SetLoop(bool isLoop)
 {
 	m_isLoop = isLoop;
 }
@@ -47,7 +47,7 @@ void AnimatedSprite::setLoop(bool isLoop)
 force to go to the index frame
 @param index : frame index in the bound
 */
-void AnimatedSprite::setCurrentFrame(int index)
+void AnimatedSprite::SetCurrentFrame(int index)
 {
 	if (index >= 0 && index < m_numFrames)
 	{
@@ -59,7 +59,7 @@ void AnimatedSprite::setCurrentFrame(int index)
 go to the next frame of animation. no other operation.
 if it is the last frame of the animation, then go to the start frame
 */
-void AnimatedSprite::gotoNextFrame()
+void AnimatedSprite::GotoNextFrame()
 {
 	int currentIndex = m_pCurrentFrame->_index;
 	setCurrentFrame((currentIndex + 1) % m_numFrames);
@@ -67,7 +67,7 @@ void AnimatedSprite::gotoNextFrame()
 /*
 stop animation and return to 0 frame
 */
-void AnimatedSprite::stop()
+void AnimatedSprite::Stop()
 {
 	m_isPlaying = false;
 	setCurrentFrame(0);
@@ -76,7 +76,7 @@ void AnimatedSprite::stop()
 /*
 pause at current frame
 */
-void AnimatedSprite::pause()
+void AnimatedSprite::Pause()
 {
 	if (m_isPlaying)
 	{
@@ -86,7 +86,7 @@ void AnimatedSprite::pause()
 /*
 resume playing animation
 */
-void AnimatedSprite::play()
+void AnimatedSprite::Play()
 {
 	m_isPlaying = true;
 	m_loopMutex = true;
@@ -96,23 +96,23 @@ void AnimatedSprite::play()
 /*
 rewind to start frame and play
 */
-void AnimatedSprite::rewind()
+void AnimatedSprite::Rewind()
 {
-	setCurrentFrame(0);
-	play();
+	SetCurrentFrame(0);
+	Play();
 }
 
 /*
 check if it is last frame of animation
 */
-bool AnimatedSprite::isAtLastFrame()
+bool AnimatedSprite::IsAtLastFrame()
 {
 	return (m_pCurrentFrame->_index == m_numFrames - 1);
 }
 /*
 check if the animation is playing
 */
-bool AnimatedSprite::isPlaying()
+bool AnimatedSprite::IsPlaying()
 {
 	return m_isPlaying;
 }
@@ -122,7 +122,7 @@ animation status updates as time elapsed.
 if it is not looping, it paused at the last frame after it's duration.
 so when resumed by using play(); starts at the start frame of anmation.
 */
-void AnimatedSprite::update()
+void AnimatedSprite::Update()
 {
 	if (m_pCurrentFrame == nullptr) return;
 
@@ -135,14 +135,14 @@ void AnimatedSprite::update()
 
 		while (m_extraTime.asMilliseconds() > duration.asMilliseconds())
 		{
-			if (isAtLastFrame() && !m_isLoop && !m_loopMutex)
+			if (IsAtLastFrame() && !m_isLoop && !m_loopMutex)
 			{
-				pause();
+				Pause();
 				break;
 			}
 			else
 			{
-				gotoNextFrame();
+				GotoNextFrame();
 				m_extraTime -= duration;
 			} 
 		}
@@ -155,9 +155,9 @@ void AnimatedSprite::update()
 render the animation sprite. 
 this function contains update() function itself.
 */
-void AnimatedSprite::render(sf::RenderWindow& window)
+void AnimatedSprite::Render(sf::RenderWindow& window)
 {
 	if (m_pCurrentFrame == nullptr) return;
-	update();
+	Update();
 	window.draw(m_spriteSheet);
 }

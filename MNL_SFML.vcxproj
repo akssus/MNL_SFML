@@ -23,7 +23,7 @@
     <ProjectGuid>{0FA92EC2-F4A8-4230-AF7D-62355BF8D148}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MNL_SFML</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,10 +97,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\cpplibraries\sfml\include;C:\cpplibraries\thor\include;%(AdditionalIncludeDirectories);$(WindowsSdkDir)\include;$(UniversalCRT_IncludePath);$(UniversalCRT_LibraryPath_x64);C:\Program Files %28x86%29\Windows Kits\10\Include;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.16299.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\cpplibraries\sfml\lib;C:\cpplibraries\thor\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;ws2_32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;opengl32.lib;gdi32.lib;freetype.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;thor-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -134,12 +139,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\cpplibraries\sfml\include;C:\cpplibraries\thor\include\Thor;%(AdditionalIncludeDirectories);$(WindowsSdkDir)\include;$(UniversalCRT_IncludePath);$(UniversalCRT_LibraryPath_x64);C:\Program Files %28x86%29\Windows Kits\10\Include;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.16299.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\cpplibraries\sfml\lib;C:\cpplibraries\thor\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;ws2_32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;opengl32.lib;gdi32.lib;freetype.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;thor-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

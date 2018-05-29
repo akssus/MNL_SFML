@@ -14,7 +14,7 @@ SoundManager::~SoundManager()
 {
 }
 
-SoundManager* SoundManager::getInstance()
+SoundManager* SoundManager::GetInstance()
 {
 	if (m_pInstance == nullptr)
 	{
@@ -22,7 +22,7 @@ SoundManager* SoundManager::getInstance()
 	}
 	return m_pInstance;
 }
-void SoundManager::freeInstance()
+void SoundManager::FreeInstance()
 {
 	m_musicTable.clear();
 	m_soundBufferTable.clear();
@@ -33,9 +33,9 @@ void SoundManager::freeInstance()
 		delete m_pInstance;
 	m_pInstance = nullptr;
 }
-void SoundManager::playSFX(std::wstring sfxFileName)
+void SoundManager::PlaySFX(std::wstring sfxFileName)
 {
-	sf::SoundBuffer* pSoundBuffer = getSoundBuffer(sfxFileName);
+	sf::SoundBuffer* pSoundBuffer = GetSoundBuffer(sfxFileName);
 	if (pSoundBuffer == nullptr) return;
 
 	sf::Sound* newSFX = new sf::Sound;
@@ -43,9 +43,9 @@ void SoundManager::playSFX(std::wstring sfxFileName)
 	m_soundQueue.push_back(std::shared_ptr<sf::Sound>(newSFX));
 	newSFX->play();
 }
-void SoundManager::playMusic(std::wstring musicFileName)
+void SoundManager::PlayMusic(std::wstring musicFileName)
 {
-	sf::Music* pMusic = getMusic(musicFileName);
+	sf::Music* pMusic = GetMusic(musicFileName);
 	if (pMusic == nullptr) return;
 	
 	//stop already being played music
@@ -54,12 +54,12 @@ void SoundManager::playMusic(std::wstring musicFileName)
 	m_pCurrentMusic->setLoop(true);
 	m_pCurrentMusic->play();
 }
-void SoundManager::stopMusic()
+void SoundManager::StopMusic()
 {
 	if (m_pCurrentMusic == nullptr) return;
 	m_pCurrentMusic->stop();
 }
-void SoundManager::stopAllSFX()
+void SoundManager::StopAllSFX()
 {
 	for (auto& pSound : m_soundQueue)
 	{
@@ -68,28 +68,28 @@ void SoundManager::stopAllSFX()
 	//it's ok. it is shared_ptr
 	m_soundQueue.clear();
 }
-sf::SoundBuffer* SoundManager::getSoundBuffer(std::wstring sfxFileName)
+sf::SoundBuffer* SoundManager::GetSoundBuffer(std::wstring sfxFileName)
 {
 	if (m_soundBufferTable.count(sfxFileName) == 0)
 	{
-		bool loadSucceed = loadSFXFromPackage(sfxFileName);
+		bool loadSucceed = LoadSFXFromPackage(sfxFileName);
 		if (!loadSucceed) return nullptr;
 	}
 	return &m_soundBufferTable[sfxFileName];
 }
 
-sf::Music* SoundManager::getMusic(std::wstring musicFileName)
+sf::Music* SoundManager::GetMusic(std::wstring musicFileName)
 {
 	if (m_musicTable.count(musicFileName) == 0)
 	{
-		bool loadSucceed = loadMusicFromPackage(musicFileName);
+		bool loadSucceed = LoadMusicFromPackage(musicFileName);
 		if (!loadSucceed) return nullptr;
 	}
 	return m_musicTable[musicFileName].get();
 }
-bool SoundManager::loadSFXFromPackage(std::wstring sfxFileName)
+bool SoundManager::LoadSFXFromPackage(std::wstring sfxFileName)
 {
-	const Resource* soundChunk = ResourceManager::getInstance()->getResource(sfxFileName);
+	const Resource* soundChunk = ResourceManager::GetInstance()->GetResource(sfxFileName);
 	if (soundChunk == nullptr) return false; //load sound failed
 
 	sf::SoundBuffer soundBuffer;
@@ -99,9 +99,9 @@ bool SoundManager::loadSFXFromPackage(std::wstring sfxFileName)
 	m_soundBufferTable[sfxFileName] = soundBuffer;
 	return true;
 }
-bool SoundManager::loadMusicFromPackage(std::wstring musicFileName)
+bool SoundManager::LoadMusicFromPackage(std::wstring musicFileName)
 {
-	const Resource* soundChunk = ResourceManager::getInstance()->getResource(musicFileName);
+	const Resource* soundChunk = ResourceManager::GetInstance()->GetResource(musicFileName);
 	if (soundChunk == nullptr) return false; //load sound failed
 
 	sf::Music* music = new sf::Music;;
@@ -113,7 +113,7 @@ bool SoundManager::loadMusicFromPackage(std::wstring musicFileName)
 }
 
 
-void SoundManager::update()
+void SoundManager::Update()
 {
 	//remove already played sfx
 	auto& it = std::remove_if(m_soundQueue.begin(),m_soundQueue.end(),[](std::shared_ptr<sf::Sound> pSound){

@@ -3,9 +3,6 @@
 #include <string>
 #include <functional>
 #include <SFML/Graphics.hpp>
-#include <Thor/Math.hpp>
-#include <Thor/Vectors.hpp>
-#include "SpriteManager.h"
 
 namespace MNL
 {
@@ -48,28 +45,28 @@ namespace MNL
 		ParticleSystem();
 		~ParticleSystem();
 		/*initSystem initialize with default functions. it can be customized with set functions*/
-		void			initSystem(ParticleDescription& desc);
-		void			setEmitter(std::function<void(ParticleSystem&, ParticleDescription&)>& emitter);
-		void			setRemover(std::function<bool(Particle&)>& remover);
-		void			setAffector(std::function<void(Particle&)>& affector);
-		void			setRenderer(std::function<void(Particle&, sf::RenderWindow&)>& renderer);
+		void			InitSystem(ParticleDescription& desc);
+		void			SetEmitter(std::function<void(ParticleSystem&, ParticleDescription&)>& emitter);
+		void			SetRemover(std::function<bool(Particle&)>& remover);
+		void			SetAffector(std::function<void(Particle&)>& affector);
+		void			SetRenderer(std::function<void(Particle&, sf::RenderWindow&)>& renderer);
 
-		void			addParticle(Particle& particle);
-		void			setPosition(float x, float y);
-		sf::Vector2f	getPosition();
+		void			AddParticle(Particle& particle);
+		void			SetPosition(float x, float y);
+		sf::Vector2f	GetPosition();
 		
-		void			resume();
+		void			Resume();
 		/*	stop removes every particles in the screen	*/
-		void			stop();
+		void			Stop();
 		/*	pause emitter but unfinished particles still remain	*/
-		void			pause();
+		void			Pause();
 		
-		void			update();
-		void			render(sf::RenderWindow& window);
+		void			Update();
+		void			Render(sf::RenderWindow& window);
 
 	private:
-		void			clearParticles();
-		void			remove_if(std::function<bool(Particle&)> conditionFunc);
+		void			ClearParticles();
+		void			Remove_if(std::function<bool(Particle&)> conditionFunc);
 
 		/* emitter describes when creating a particle, defines initial parameters of the particle */
 		std::function<void(ParticleSystem&, ParticleDescription&)>	m_fucEmitter;
@@ -97,10 +94,10 @@ namespace MNL
 		sf::BlendMode		m_blendMode;
 	};
 
-	void defaultEmitter(ParticleSystem& ps, ParticleDescription& pd);
-	bool defaultRemover(Particle& particle);
-	void defaultAffector(Particle& particle);
-	void defaultRenderer(Particle& particle, sf::RenderWindow& window);
+	void DefaultEmitter(ParticleSystem& ps, ParticleDescription& pd);
+	bool DefaultRemover(Particle& particle);
+	void DefaultAffector(Particle& particle);
+	void DefaultRenderer(Particle& particle, sf::RenderWindow& window);
 
 
 }

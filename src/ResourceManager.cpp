@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+#include "zip_utils/unzip.h"
 
 using namespace MNL;
 
@@ -11,9 +12,9 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
-	freeInstance();
+	FreeInstance();
 }
-ResourceManager* ResourceManager::getInstance()
+ResourceManager* ResourceManager::GetInstance()
 {
 	if (m_pInstance == nullptr)
 	{
@@ -21,13 +22,13 @@ ResourceManager* ResourceManager::getInstance()
 	}
 	return m_pInstance;
 };
-void ResourceManager::freeInstance()
+void ResourceManager::FreeInstance()
 {
-	clearResourceTable();
+	ClearResourceTable();
 	m_pInstance = nullptr;
 }
 
-bool ResourceManager::loadResourcePackage(std::wstring packageFilePath)
+bool ResourceManager::LoadResourcePackage(std::wstring packageFilePath)
 {
 	HZIP hZip = OpenZip(packageFilePath.c_str(), 0);
 	if (hZip == nullptr) return false; //load file failed
@@ -50,12 +51,12 @@ bool ResourceManager::loadResourcePackage(std::wstring packageFilePath)
 	return true;
 }
 
-const Resource* ResourceManager::getResource(std::wstring keyName)
+const Resource* ResourceManager::GetResource(std::wstring keyName)
 {
 	return (m_resourceTable.count(keyName) == 0) ? nullptr : &m_resourceTable[keyName];
 }
 
-void ResourceManager::clearResourceTable()
+void ResourceManager::ClearResourceTable()
 {
 	for (auto& resPair : m_resourceTable)
 	{
@@ -65,7 +66,7 @@ void ResourceManager::clearResourceTable()
 	m_resourceTable.clear();
 }
 
-void ResourceManager::destroyResource(std::wstring keyName)
+void ResourceManager::DestroyResource(std::wstring keyName)
 {
 	if (m_resourceTable.count(keyName) != 0)
 	{

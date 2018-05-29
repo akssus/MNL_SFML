@@ -12,9 +12,9 @@ SpriteManager::SpriteManager()
 }
 SpriteManager::~SpriteManager()
 {
-	freeInstance();
+	FreeInstance();
 }
-SpriteManager* SpriteManager::getInstance()
+SpriteManager* SpriteManager::GetInstance()
 {
 	if (m_pInstance == nullptr)
 	{
@@ -23,7 +23,7 @@ SpriteManager* SpriteManager::getInstance()
 	return m_pInstance;
 };
 
-void SpriteManager::freeInstance()
+void SpriteManager::FreeInstance()
 {
 	m_textureTable.clear();
 
@@ -40,12 +40,12 @@ load texture from resource manager and create sprite
 @return		copy of sf::sprite 
 @error		returns empty sprite
 */
-sf::Sprite SpriteManager::createSprite(std::wstring imageFileName)
+sf::Sprite SpriteManager::CreateSprite(std::wstring imageFileName)
 {
 	sf::Sprite		newSprite;
 	sf::Texture*	newTexture;
 	
-	newTexture = getTexture(imageFileName);
+	newTexture = GetTexture(imageFileName);
 	if(newTexture != nullptr)
 	{
 		newSprite.setTexture(*newTexture);
@@ -59,7 +59,7 @@ load texture from resource manager
 @return		sf::Texture* in the texture table
 @error		returns null
 */
-sf::Texture* SpriteManager::getTexture(std::wstring imageFileName)
+sf::Texture* SpriteManager::GetTexture(std::wstring imageFileName)
 {
 	sf::Texture* newTexture = nullptr;
 	bool textureLoadSuccess = true;
@@ -68,9 +68,9 @@ sf::Texture* SpriteManager::getTexture(std::wstring imageFileName)
 	if (m_textureTable.count(imageFileName) == 0)
 	{
 		//if not exist then try to load from memory
-		if (loadTextureFromPackage(imageFileName) == false)
+		if (LoadTextureFromPackage(imageFileName) == false)
 		{
-			if (loadTextureFromLocalPath(imageFileName) == false)
+			if (LoadTextureFromLocalPath(imageFileName) == false)
 			{
 				//load failed
 				textureLoadSuccess = false;
@@ -82,18 +82,18 @@ sf::Texture* SpriteManager::getTexture(std::wstring imageFileName)
 	return newTexture;
 }
 
-AnimationFrameList* SpriteManager::getFrameList(std::wstring jsonFileName)
+AnimationFrameList* SpriteManager::GetFrameList(std::wstring jsonFileName)
 {
 	if (m_animationFrameListTable.count(jsonFileName) == 0)
 	{
 		//if not in the table, try to load from packages
-		bool loadJsonSucceed = loadSheetDataFromJson(jsonFileName);
+		bool loadJsonSucceed = LoadSheetDataFromJson(jsonFileName);
 		if (!loadJsonSucceed) return nullptr;
 	}
 	return &m_animationFrameListTable[jsonFileName];
 }
 
-bool SpriteManager::loadTextureFromLocalPath(std::wstring localFilePath)
+bool SpriteManager::LoadTextureFromLocalPath(std::wstring localFilePath)
 {
 	//insert only if it doesnt exist
 	if (m_textureTable.count(localFilePath) == 0)
@@ -112,14 +112,14 @@ bool SpriteManager::loadTextureFromLocalPath(std::wstring localFilePath)
 	return true;
 }
 
-bool SpriteManager::loadTextureFromPackage(std::wstring imageFileName)
+bool SpriteManager::LoadTextureFromPackage(std::wstring imageFileName)
 {
 	//insert only if it doesnt exist
 	if (m_textureTable.count(imageFileName) == 0)
 	{
 		sf::Texture* newTexture = new sf::Texture();
-		ResourceManager* pResourceManager = ResourceManager::getInstance();
-		const Resource* textureChunk = pResourceManager->getResource(imageFileName);
+		ResourceManager* pResourceManager = ResourceManager::GetInstance();
+		const Resource* textureChunk = pResourceManager->GetResource(imageFileName);
 		if (textureChunk == nullptr) return false;
 		
 		bool textureLoadSuccess = newTexture->loadFromMemory(textureChunk->_memBuffer, textureChunk->_bufSize);
@@ -134,9 +134,9 @@ bool SpriteManager::loadTextureFromPackage(std::wstring imageFileName)
 	return true;
 }
 
-bool SpriteManager::loadSheetDataFromJson(std::wstring jsonFileName)
+bool SpriteManager::LoadSheetDataFromJson(std::wstring jsonFileName)
 {
-	const Resource* jsonChunk = ResourceManager::getInstance()->getResource(jsonFileName);
+	const Resource* jsonChunk = ResourceManager::GetInstance()->GetResource(jsonFileName);
 	if (jsonChunk == nullptr) return false;
 
 	std::istringstream jsonData(std::string(jsonChunk->_memBuffer, jsonChunk->_bufSize));

@@ -1,5 +1,4 @@
 #pragma once
-#include <windows.h>
 #include <memory>
 #include <map>
 #include "zip_utils\unzip.h"
@@ -20,17 +19,17 @@ namespace MNL
 		~ResourceManager();
 
 	public:
-		static ResourceManager*		getInstance();
-		void						freeInstance();
+		static ResourceManager*		GetInstance();
+		void						FreeInstance();
 
-		bool						loadResourcePackage(std::wstring packageFilePath);
+		bool						LoadResourcePackage(std::wstring packageFilePath);
 		//returns null if resource is not exist
-		const Resource*				getResource(std::wstring keyName);
+		const Resource*				GetResource(std::wstring keyName);
 		//destroy resource and recover memory
-		void						destroyResource(std::wstring keyName);
+		void						DestroyResource(std::wstring keyName);
 
 	private:
-		void						clearResourceTable();
+		void						ClearResourceTable();
 
 	private:
 		static ResourceManager*				m_pInstance;

@@ -4,18 +4,13 @@ using namespace MNL;
 
 ParticleManager* ParticleManager::m_pInstance = nullptr;
 
-ParticleManager::ParticleManager()
-{
-}
+ParticleManager::ParticleManager() = default;
 
 
-ParticleManager::~ParticleManager()
-{
-
-}
+ParticleManager::~ParticleManager() = default;
 
 
-ParticleManager* ParticleManager::getInstance()
+ParticleManager* ParticleManager::GetInstance()
 {
 	if (m_pInstance == nullptr)
 	{
@@ -24,47 +19,47 @@ ParticleManager* ParticleManager::getInstance()
 	return m_pInstance;
 }
 
-void ParticleManager::freeInstance()
+void ParticleManager::FreeInstance()
 {
 	if (m_pInstance != nullptr)
 		delete m_pInstance;
 	m_pInstance = nullptr;
 }
-ParticleSystem	ParticleManager::createParticleSystem(ParticleDescription& desc)
+ParticleSystem	ParticleManager::CreateParticleSystem(ParticleDescription& desc)
 {
 	ParticleSystem ps;
-	ps.initSystem(desc);
+	ps.InitSystem(desc);
 	return ps;
 }
-/*
-ParticleSystem	ParticleManager::createParticleSystem(std::wstring jsonFileName)
+
+ParticleSystem	ParticleManager::CreateParticleSystem(const std::wstring& jsonFileName)
 {
 	//implement later
 }
-*/
-void ParticleManager::spreadParticleSystem(ParticleSystem& ps)
+
+void ParticleManager::SpreadParticleSystem(ParticleSystem& ps)
 {
 	m_particleSystemQueue.push_back(ps);
 }
-void ParticleManager::createAndSpreadParticleSystem(ParticleDescription& desc)
+void ParticleManager::CreateAndSpreadParticleSystem(ParticleDescription& desc)
 {
-	m_particleSystemQueue.push_back(createParticleSystem(desc));
+	m_particleSystemQueue.push_back(CreateParticleSystem(desc));
 }
-void ParticleManager::createAndSpreadParticleSystem(std::wstring jsonFileName)
+void ParticleManager::CreateAndSpreadParticleSystem(const std::wstring& jsonFileName)
 {
-	//m_particleSystemQueue.push_back(createParticleSystem(jsonFileName));
+	m_particleSystemQueue.push_back(CreateParticleSystem(jsonFileName));
 }
 
 
-void ParticleManager::clearParticleSystems()
+void ParticleManager::ClearParticleSystems()
 {
 	m_particleSystemQueue.clear();
 }
-void ParticleManager::update()
+void ParticleManager::Update()
 {
 	for (auto& particleSystem : m_particleSystemQueue)
 	{
-		particleSystem.update();
+		particleSystem.Update();
 	}
 	//remove finished particle system
 	auto& it = std::remove_if(m_particleSystemQueue.begin(), m_particleSystemQueue.end(), 
@@ -75,10 +70,10 @@ void ParticleManager::update()
 	);
 	m_particleSystemQueue.erase(it, m_particleSystemQueue.end());
 }
-void ParticleManager::render(sf::RenderWindow& window)
+void ParticleManager::Render(sf::RenderWindow& window)
 {
 	for (auto& particleSystem : m_particleSystemQueue)
 	{
-		particleSystem.render(window);
+		particleSystem.Render(window);
 	}
 }

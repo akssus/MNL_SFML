@@ -1,86 +1,86 @@
 #include "ParticleSystem.h"
+#include "Thor/Vectors.hpp"
+#include "Thor/Math.hpp"
+#include "Thor/Math/Random.hpp"
+#include "SpriteManager.h"
+
 
 using namespace MNL;
 
-
-
-ParticleSystem::ParticleSystem()
-{
-}
-
+ParticleSystem::ParticleSystem() = default;
 
 ParticleSystem::~ParticleSystem()
 {
 	m_particleQueue.clear();
 }
-void ParticleSystem::initSystem(ParticleDescription& desc)
+void ParticleSystem::InitSystem(ParticleDescription& desc)
 {
 	m_particleDescription = desc;
 	m_systemDuration = desc._systemDuration;
-	m_fucAffector	= defaultAffector;
-	m_fucEmitter	= defaultEmitter;
-	m_fucRemover	= defaultRemover;
-	m_fucRenderer	= defaultRenderer;
+	m_fucAffector	= DefaultAffector;
+	m_fucEmitter	= DefaultEmitter;
+	m_fucRemover	= DefaultRemover;
+	m_fucRenderer	= DefaultRenderer;
 	m_isInitialized = true;
 }
-void ParticleSystem::setEmitter(std::function<void(ParticleSystem&, ParticleDescription&)>& emitter)
+void ParticleSystem::SetEmitter(std::function<void(ParticleSystem&, ParticleDescription&)>& emitter)
 {
 	m_fucEmitter = emitter;
 }
-void ParticleSystem::setRemover(std::function<bool(Particle&)>& remover)
+void ParticleSystem::SetRemover(std::function<bool(Particle&)>& remover)
 {
 	m_fucRemover = remover;
 }
-void ParticleSystem::setAffector(std::function<void(Particle&)>& affector)
+void ParticleSystem::SetAffector(std::function<void(Particle&)>& affector)
 {
 	m_fucAffector = affector;
 }
-void ParticleSystem::setRenderer(std::function<void(Particle&, sf::RenderWindow&)>& renderer)
+void ParticleSystem::SetRenderer(std::function<void(Particle&, sf::RenderWindow&)>& renderer)
 {
 	m_fucRenderer = renderer;
 }
 
-void ParticleSystem::addParticle(Particle& particle)
+void ParticleSystem::AddParticle(Particle& particle)
 {
 	m_particleQueue.push_back(particle);
 }
-void ParticleSystem::setPosition(float x, float y)
+void ParticleSystem::SetPosition(float x, float y)
 {
 	m_pos.x = x;
 	m_pos.y = y;
 }
 
-sf::Vector2f ParticleSystem::getPosition()
+sf::Vector2f ParticleSystem::GetPosition()
 {
 	return m_pos;
 }
-void ParticleSystem::remove_if(std::function<bool(Particle&)> conditionFunc)
+void ParticleSystem::Remove_if(std::function<bool(Particle&)> conditionFunc)
 {
 	auto& it = std::remove_if(m_particleQueue.begin(), m_particleQueue.end(), conditionFunc);
 	m_particleQueue.erase(it, m_particleQueue.end());
 }
-void ParticleSystem::resume()
+void ParticleSystem::Resume()
 {
 	m_isEmitting = true;
 }
 
-void ParticleSystem::stop()
+void ParticleSystem::Stop()
 {
 	m_isEmitting = false;
-	clearParticles();
+	ClearParticles();
 }
 
-void ParticleSystem::pause()
+void ParticleSystem::Pause()
 {
 	m_isEmitting = false;
 }
 
-void ParticleSystem::update()
+void ParticleSystem::Update()
 {
 	if (!m_isInitialized) return;
 
 	//remove finished particles
-	remove_if(m_fucRemover);
+	Remove_if(m_fucRemover);
 
 	ParticleDescription& pd = m_particleDescription;
 
@@ -116,7 +116,7 @@ void ParticleSystem::update()
 		}
 	}
 }
-void ParticleSystem::render(sf::RenderWindow& window)
+void ParticleSystem::Render(sf::RenderWindow& window)
 {
 	for (auto& particle : m_particleQueue)
 	{
@@ -124,7 +124,7 @@ void ParticleSystem::render(sf::RenderWindow& window)
 	}
 }
 
-void ParticleSystem::clearParticles()
+void ParticleSystem::ClearParticles()
 {
 	m_particleQueue.clear();
 }
@@ -132,16 +132,16 @@ void ParticleSystem::clearParticles()
 /*
 **************************default functions**********************************
 */
-void defaultEmitter(ParticleSystem& ps, ParticleDescription& pd)
+void DefaultEmitter(ParticleSystem& ps, ParticleDescription& pd)
 {
 	int duration = pd._emitDuration + thor::random(-pd._emitDurationRandomness, -pd._emitDurationRandomness);
 	sf::Vector2f velocity = thor::rotatedVector(pd._emitVelocity, thor::random(-pd._emitVelocityRandomness, -pd._emitVelocityRandomness));
 	sf::Vector2f randomPos(thor::random(-pd._emitPositionRandomness.x, pd._emitPositionRandomness.x),
 		thor::random(-pd._emitPositionRandomness.y, pd._emitPositionRandomness.y));
-	sf::Vector2f position = ps.getPosition() + randomPos;
+	sf::Vector2f position = ps.GetPosition() + randomPos;
 	
 	Particle particle;
-	particle._sprite = SpriteManager::getInstance()->createSprite(pd._particleTextureName);
+	particle._sprite = SpriteManager::GetInstance()->CreateSprite(pd._particleTextureName);
 	particle._pos = position;
 	particle._sprite.setPosition(particle._pos);
 	particle._velocity = velocity;
@@ -149,14 +149,14 @@ void defaultEmitter(ParticleSystem& ps, ParticleDescription& pd)
 	particle._duration = duration;
 	particle._dAngle = pd._angleEnd - pd._angleStart;
 	particle._dScale = pd._scaleEnd - pd._scaleStart;
-	ps.addParticle(particle);
+	ps.AddParticle(particle);
 }
-bool defaultRemover(Particle& particle)
+bool DefaultRemover(Particle& particle)
 {
 	if (particle._currentLife > particle._duration) return true;
 	return false;
 }
-void defaultAffector(Particle& particle)
+void DefaultAffector(Particle& particle)
 {
 	particle._velocity += particle._force;
 	particle._pos += particle._velocity;
@@ -170,7 +170,7 @@ void defaultAffector(Particle& particle)
 
 	particle._currentLife++;
 }
-void defaultRenderer(Particle& particle, sf::RenderWindow& window)
+void DefaultRenderer(Particle& particle, sf::RenderWindow& window)
 {
 	window.draw(particle._sprite);
 }

@@ -21,24 +21,24 @@ namespace MNL
 		~ParticleManager();
 
 	public:
-		static ParticleManager*	getInstance();
-		void freeInstance();
+		static ParticleManager*	GetInstance();
+		void FreeInstance();
 
 		/*create a particle system with description
 		@return copy of particle system*/
-		ParticleSystem	createParticleSystem(ParticleDescription& desc);
+		ParticleSystem	CreateParticleSystem(ParticleDescription& desc);
 		/*load particle data from file and bind it to description table
 		@return copy of particle system*/
-		ParticleSystem	createParticleSystem(std::wstring jsonFileName);
+		ParticleSystem	CreateParticleSystem(const std::wstring& jsonFileName);
 		/*let manager class draw and destroy it automatically*/
-		void			spreadParticleSystem(ParticleSystem& ps);
-		void			createAndSpreadParticleSystem(ParticleDescription& desc);
-		void			createAndSpreadParticleSystem(std::wstring jsonFileName);
+		void			SpreadParticleSystem(ParticleSystem& ps);
+		void			CreateAndSpreadParticleSystem(ParticleDescription& desc);
+		void			CreateAndSpreadParticleSystem(const std::wstring& jsonFileName);
 
 
-		void clearParticleSystems();
-		void update();
-		void render(sf::RenderWindow& window);
+		void ClearParticleSystems();
+		void Update();
+		void Render(sf::RenderWindow& window);
 		
 	private:
 		static ParticleManager*		m_pInstance;

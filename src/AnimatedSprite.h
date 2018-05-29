@@ -16,22 +16,22 @@ namespace MNL
 		AnimatedSprite();
 		~AnimatedSprite();
 
-		void setSpriteSheet(std::wstring imageFileName);
-		bool setSheetData(std::wstring jsonFileName);
-		void setCurrentFrame(int index);
-		void setLoop(bool isLoop);
+		void SetSpriteSheet(std::wstring imageFileName);
+		bool SetSheetData(std::wstring jsonFileName);
+		void SetCurrentFrame(int index);
+		void SetLoop(bool isLoop);
 
-		void gotoNextFrame();
-		void stop();
-		void pause();
-		void play();
-		void rewind();
+		void GotoNextFrame();
+		void Stop();
+		void Pause();
+		void Play();
+		void Rewind();
 
-		bool isAtLastFrame();
-		bool isPlaying();
+		bool IsAtLastFrame();
+		bool IsPlaying();
 
-		void update();
-		void render(sf::RenderWindow& window);
+		void Update();
+		void Render(sf::RenderWindow& window);
 		
 	private:
 		sf::Clock						m_clock;

@@ -15,22 +15,22 @@ namespace MNL
 		~SoundManager();
 
 	public:
-		static SoundManager*	getInstance();
-		void					freeInstance();
+		static SoundManager*	GetInstance();
+		void					FreeInstance();
 
-		void	playSFX(std::wstring sfxFileName);
-		void	playMusic(std::wstring musicFileName);
-		void	stopMusic();
-		void	stopAllSFX();
+		void	PlaySFX(std::wstring sfxFileName);
+		void	PlayMusic(std::wstring musicFileName);
+		void	StopMusic();
+		void	StopAllSFX();
 
-		void	update();
+		void	Update();
 
-		bool	loadSFXFromPackage(std::wstring sfxFileName);
-		bool	loadMusicFromPackage(std::wstring musicFileName);
+		bool	LoadSFXFromPackage(std::wstring sfxFileName);
+		bool	LoadMusicFromPackage(std::wstring musicFileName);
 
 	private:
-		sf::SoundBuffer*	getSoundBuffer(std::wstring sfxFileName);
-		sf::Music*			getMusic(std::wstring musicFileName);
+		sf::SoundBuffer*	GetSoundBuffer(std::wstring sfxFileName);
+		sf::Music*			GetMusic(std::wstring musicFileName);
 	public:
 
 	private:

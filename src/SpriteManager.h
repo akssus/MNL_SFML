@@ -25,17 +25,17 @@ namespace MNL {
 		~SpriteManager();
 
 	public:
-		static SpriteManager*	getInstance();
-		sf::Sprite				createSprite(std::wstring imageFileName);
-		sf::Texture*			getTexture(std::wstring imageFileName);
-		AnimationFrameList*		getFrameList(std::wstring jsonFileName);
+		static SpriteManager*	GetInstance();
+		sf::Sprite				CreateSprite(std::wstring imageFileName);
+		sf::Texture*			GetTexture(std::wstring imageFileName);
+		AnimationFrameList*		GetFrameList(std::wstring jsonFileName);
 
 	private:
-		void			freeInstance();
+		void			FreeInstance();
 
-		bool			loadTextureFromLocalPath(std::wstring localFilePath);
-		bool			loadTextureFromPackage(std::wstring imageFileName);
-		bool			loadSheetDataFromJson(std::wstring jsonFileName);
+		bool			LoadTextureFromLocalPath(std::wstring localFilePath);
+		bool			LoadTextureFromPackage(std::wstring imageFileName);
+		bool			LoadSheetDataFromJson(std::wstring jsonFileName);
 
 	private:
 		static SpriteManager* m_pInstance;
