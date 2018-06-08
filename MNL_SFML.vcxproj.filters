@@ -51,6 +51,9 @@
     <ClCompile Include="src\ParticleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MnGameSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SpriteManager.h">
@@ -78,6 +81,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\ParticleManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MnGameSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MnGameSystemModule.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

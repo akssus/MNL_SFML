@@ -155,6 +155,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MnGameSystem.cpp" />
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\ParticleManager.cpp" />
     <ClCompile Include="src\ParticleSystem.cpp" />
@@ -165,6 +166,8 @@
     <ClCompile Include="src\zip_utils\zip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MnGameSystem.h" />
+    <ClInclude Include="MnGameSystemModule.h" />
     <ClInclude Include="src\jsonnlohmann\json.hpp" />
     <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\ParticleManager.h" />
