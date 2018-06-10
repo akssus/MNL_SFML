@@ -2,6 +2,7 @@
 #include <memory>
 #include <map>
 #include "zip_utils\unzip.h"
+#include "MnSingleton.h"
 
 namespace MNL
 {
@@ -12,16 +13,13 @@ namespace MNL
 		char*		 _memBuffer;
 	};
 
-	class ResourceManager
+	class ResourceManager : public MnSingleton<ResourceManager>
 	{
 	private:
 		ResourceManager();
 		~ResourceManager();
 
 	public:
-		static ResourceManager*		GetInstance();
-		void						FreeInstance();
-
 		bool						LoadResourcePackage(std::wstring packageFilePath);
 		//returns null if resource is not exist
 		const Resource*				GetResource(std::wstring keyName);
@@ -32,7 +30,6 @@ namespace MNL
 		void						ClearResourceTable();
 
 	private:
-		static ResourceManager*				m_pInstance;
 		std::map<std::wstring, Resource>	m_resourceTable;
 	};
 

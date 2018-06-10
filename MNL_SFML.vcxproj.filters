@@ -51,7 +51,10 @@
     <ClCompile Include="src\ParticleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MnGameSystem.cpp">
+    <ClCompile Include="src\MnGameSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnGameSystemModule.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,10 +86,16 @@
     <ClInclude Include="src\ParticleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MnGameSystem.h">
+    <ClInclude Include="src\MnGameSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MnGameSystemModule.h">
+    <ClInclude Include="src\MnGameSystemModule.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnSingleton.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MnSprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

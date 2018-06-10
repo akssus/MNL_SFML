@@ -62,7 +62,7 @@ if it is the last frame of the animation, then go to the start frame
 void AnimatedSprite::GotoNextFrame()
 {
 	int currentIndex = m_pCurrentFrame->_index;
-	setCurrentFrame((currentIndex + 1) % m_numFrames);
+	SetCurrentFrame((currentIndex + 1) % m_numFrames);
 }
 /*
 stop animation and return to 0 frame
@@ -70,7 +70,7 @@ stop animation and return to 0 frame
 void AnimatedSprite::Stop()
 {
 	m_isPlaying = false;
-	setCurrentFrame(0);
+	SetCurrentFrame(0);
 	m_extraTime = sf::Time();
 }
 /*

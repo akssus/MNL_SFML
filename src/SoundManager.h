@@ -5,18 +5,17 @@
 #include <string>
 #include <memory>
 #include "SFML/Audio.hpp"
+#include "MnSingleton.h"
 
 namespace MNL
 {
-	class SoundManager
+	class SoundManager : public MnSingleton<SoundManager>
 	{
 	private:
 		SoundManager();
 		~SoundManager();
 
 	public:
-		static SoundManager*	GetInstance();
-		void					FreeInstance();
 
 		void	PlaySFX(std::wstring sfxFileName);
 		void	PlayMusic(std::wstring musicFileName);
@@ -34,7 +33,6 @@ namespace MNL
 	public:
 
 	private:
-		static SoundManager*					m_pInstance;
 		std::map<std::wstring, sf::SoundBuffer> m_soundBufferTable;
 		std::map<std::wstring, std::shared_ptr<sf::Music> >		m_musicTable;
 		std::list<std::shared_ptr<sf::Sound> >					m_soundQueue;

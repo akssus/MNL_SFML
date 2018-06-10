@@ -2,6 +2,7 @@
 #include <list>
 #include <string>
 #include "ParticleSystem.h"
+#include "MnSingleton.h"
 
 
 /*
@@ -14,16 +15,13 @@ please avoid letting the manager class draw the particle system with infinite du
 
 namespace MNL
 {
-	class ParticleManager
+	class ParticleManager : public MnSingleton<ParticleSystem>
 	{
 	private:
 		ParticleManager();
 		~ParticleManager();
 
 	public:
-		static ParticleManager*	GetInstance();
-		void FreeInstance();
-
 		/*create a particle system with description
 		@return copy of particle system*/
 		ParticleSystem	CreateParticleSystem(ParticleDescription& desc);
@@ -35,13 +33,11 @@ namespace MNL
 		void			CreateAndSpreadParticleSystem(ParticleDescription& desc);
 		void			CreateAndSpreadParticleSystem(const std::wstring& jsonFileName);
 
-
 		void ClearParticleSystems();
 		void Update();
 		void Render(sf::RenderWindow& window);
 		
 	private:
-		static ParticleManager*		m_pInstance;
 		std::list<ParticleSystem>	m_particleSystemQueue;
 		std::map<std::wstring, ParticleDescription> m_particleDescTable;
 	};

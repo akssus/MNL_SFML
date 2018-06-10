@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace MNL
 {
 	class MnGameSystemModule
@@ -9,6 +7,12 @@ namespace MNL
 	public:
 		MnGameSystemModule();
 		~MnGameSystemModule();
+
+		void Release();
+
+	private:
+		void _RegisterSelf();
+		void _UnregisterSelf();
 
 	};
 }
