@@ -1,4 +1,5 @@
 #pragma once
+#include <wingdi.h>
 
 namespace MNL
 {
@@ -6,12 +7,14 @@ namespace MNL
 	{
 	public:
 		MnGameSystemModule();
-		~MnGameSystemModule();
+		virtual ~MnGameSystemModule();
 
-		void Release();
+		virtual void OnRegistered() = 0;
+		virtual void OnUnregistering() = 0;
+		virtual void Update() = 0;
 
 	private:
-		void _RegisterSelf();
+		[[deprecated]] void _RegisterSelf();
 		void _UnregisterSelf();
 
 	};

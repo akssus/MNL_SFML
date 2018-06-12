@@ -22,11 +22,18 @@ namespace MNL
 			m_spInstance.~shared_ptr();
 			m_spInstance = nullptr;
 		}
+
+		MnSingleton(const MnSingleton&) = delete;
+
+	protected:
+		MnSingleton(){}
+		virtual ~MnSingleton(){}
+
 	private:
 		static std::shared_ptr<T> m_spInstance;
 	};
 
 	template<typename T>
-	std::shared_ptr<T> MnSingleton::m_spInstance = nullptr;
+	std::shared_ptr<T> MnSingleton<T>::m_spInstance = nullptr;
 
 }

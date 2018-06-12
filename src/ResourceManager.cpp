@@ -3,30 +3,6 @@
 
 using namespace MNL;
 
-ResourceManager* ResourceManager::m_pInstance = nullptr;
-
-ResourceManager::ResourceManager()
-{
-
-}
-
-ResourceManager::~ResourceManager()
-{
-	FreeInstance();
-}
-ResourceManager* ResourceManager::GetInstance()
-{
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new ResourceManager();
-	}
-	return m_pInstance;
-};
-void ResourceManager::FreeInstance()
-{
-	ClearResourceTable();
-	m_pInstance = nullptr;
-}
 
 bool ResourceManager::LoadResourcePackage(std::wstring packageFilePath)
 {

@@ -4,36 +4,6 @@
 
 using namespace MNL;
 
-SpriteManager* SpriteManager::m_pInstance = nullptr;
-
-SpriteManager::SpriteManager()
-{
-
-}
-SpriteManager::~SpriteManager()
-{
-	FreeInstance();
-}
-SpriteManager* SpriteManager::GetInstance()
-{
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new SpriteManager();
-	}
-	return m_pInstance;
-};
-
-void SpriteManager::FreeInstance()
-{
-	m_textureTable.clear();
-
-	if (m_pInstance != nullptr)
-	{
-		delete m_pInstance;
-	}
-	m_pInstance = nullptr;
-}
-
 /*
 load texture from resource manager and create sprite
 @param		imageFileName : image file name in the package or local path

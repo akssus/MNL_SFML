@@ -11,43 +11,47 @@ MNL::MnGameSystem::~MnGameSystem()
 	_FreeAllModules();
 }
 
-bool MNL::MnGameSystem::RegisterModule(const MnGameSystemModule* pModule)
+bool MNL::MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
 {
-	if (pModule == nullptr) return false;
+	if (spModule == nullptr) return false;
 
-	std::string moduleClassName = typeid(*pModule).name();
-	_lstModules[moduleClassName] = const_cast<MnGameSystemModule*>(pModule);
+	const std::string moduleClassName = typeid(*spModule).name();
+	m_lstModules[moduleClassName] = spModule;
+
+	spModule->OnRegistered();
 
 	return true;
 }
 
-bool MNL::MnGameSystem::UnreigsterModule(const std::string & moduleName)
+bool MNL::MnGameSystem::UnregisterModule(const std::string & moduleName)
 {
-	auto it = _lstModules.find(moduleName);
-	if (it != _lstModules.end())
+	auto it = m_lstModules.find(moduleName);
+	if (it != m_lstModules.end())
 	{
-		_lstModules.erase(it);
+		it->second->OnUnregistering();
+
+		m_lstModules.erase(it);
 		return true;
 	}
 	return false;
 }
 
-bool MNL::MnGameSystem::UnregisterModule(const MnGameSystemModule * pModule)
+bool MNL::MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule)
 {
-	if (pModule == nullptr) return false;
+	if (spModule == nullptr) return false;
 
-	std::string moduleClassName = typeid(*pModule).name();
+	std::string moduleClassName = typeid(*spModule).name();
 	return UnregisterModule(moduleClassName);
 }
 
-MnGameSystemModule* const MNL::MnGameSystem::GetModule(const std::string & moduleName)
+std::shared_ptr<MnGameSystemModule> MNL::MnGameSystem::GetModule(const std::string & moduleName)
 {
-	auto it = _lstModules.find(moduleName);
-	if (it != _lstModules.end())
+	auto it = m_lstModules.find(moduleName);
+	if (it != m_lstModules.end())
 	{
 		return it->second;
 	}
-	return nullptr;
+	return std::shared_ptr<MnGameSystemModule>();
 }
 
 bool MNL::MnGameSystem::HasModule(const std::string & moduleName)
@@ -58,11 +62,11 @@ bool MNL::MnGameSystem::HasModule(const std::string & moduleName)
 
 void MNL::MnGameSystem::_FreeAllModules()
 {
-	auto it = _lstModules.begin();
-	while (it != _lstModules.end())
+	auto it = m_lstModules.begin();
+	while (it != m_lstModules.end())
 	{
-		auto pModule = it->second;
-		pModule->Release();
-		delete pModule;
+		//erase로 이터레이팅 문제 터질 수 있어서 배칭처리
+		it->second->OnUnregistering();
 	}
+	m_lstModules.clear();
 }

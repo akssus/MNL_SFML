@@ -3,36 +3,7 @@
 
 using namespace MNL;
 
-SoundManager* SoundManager::m_pInstance = nullptr;
 
-SoundManager::SoundManager()
-{
-}
-
-
-SoundManager::~SoundManager()
-{
-}
-
-SoundManager* SoundManager::GetInstance()
-{
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new SoundManager;
-	}
-	return m_pInstance;
-}
-void SoundManager::FreeInstance()
-{
-	m_musicTable.clear();
-	m_soundBufferTable.clear();
-	m_soundQueue.clear();
-	m_pCurrentMusic = nullptr;
-
-	if (m_pInstance != nullptr)
-		delete m_pInstance;
-	m_pInstance = nullptr;
-}
 void SoundManager::PlaySFX(std::wstring sfxFileName)
 {
 	sf::SoundBuffer* pSoundBuffer = GetSoundBuffer(sfxFileName);

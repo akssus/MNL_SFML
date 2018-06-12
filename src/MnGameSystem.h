@@ -4,6 +4,7 @@
 #include <map>
 #include "MnGameSystemModule.h"
 #include "MnSingleton.h"
+#include "../MnBootstrap.h"
 
 namespace MNL
 {
@@ -13,9 +14,10 @@ namespace MNL
 		MnGameSystem();
 		~MnGameSystem();
 
-		bool RegisterModule(const MnGameSystemModule* pModule);
-		bool UnreigsterModule(const std::string& moduleName);
-		bool UnregisterModule(const MnGameSystemModule* pModule);
+		bool RegisterModule(std::shared_ptr<MnGameSystemModule> pModule);
+
+		bool UnregisterModule(const std::string& moduleName);
+		bool UnregisterModule(std::shared_ptr<MnGameSystemModule> pModule);
 
 		template <typename T>
 		bool UnregisterModule()
@@ -24,10 +26,10 @@ namespace MNL
 			return UnregisterModule(moduleClassName);
 		}
 
-		MnGameSystemModule* const GetModule(const std::string& moduleName);
+		std::shared_ptr<MnGameSystemModule> GetModule(const std::string& moduleName);
 
 		template <typename T>
-		T const * GetModule()
+		std::shared_ptr<T> const * GetModule()
 		{
 			std::string moduleClassName = typeid(T).name();
 			auto pModule = GetModule(moduleClassName);
@@ -44,12 +46,13 @@ namespace MNL
 			return HasModule(moduleClassName);
 		}
 
-
 	private:
 		void _FreeAllModules();
 
 	private:
-		std::map<std::string, MnGameSystemModule* > _lstModules;
+		MnBootstrap m_bootstrap;
+		std::map<std::string, std::shared_ptr<MnGameSystemModule> > m_lstModules;
+
 
 	};
 }

@@ -2,29 +2,7 @@
 
 using namespace MNL;
 
-ParticleManager* ParticleManager::m_pInstance = nullptr;
 
-ParticleManager::ParticleManager() = default;
-
-
-ParticleManager::~ParticleManager() = default;
-
-
-ParticleManager* ParticleManager::GetInstance()
-{
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new ParticleManager;
-	}
-	return m_pInstance;
-}
-
-void ParticleManager::FreeInstance()
-{
-	if (m_pInstance != nullptr)
-		delete m_pInstance;
-	m_pInstance = nullptr;
-}
 ParticleSystem	ParticleManager::CreateParticleSystem(ParticleDescription& desc)
 {
 	ParticleSystem ps;
