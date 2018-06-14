@@ -22,6 +22,12 @@
     <Filter Include="외부라이브러리\jsonnlohmann">
       <UniqueIdentifier>{fc9b9733-16bd-40d4-87d4-2e2394bddebb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{85f21d2f-3299-4457-b27b-e5fbedb74a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{5e6693ca-cbea-4571-817d-fe4f325de49c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -51,14 +57,17 @@
     <ClCompile Include="src\ParticleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\MnGameSystem.cpp">
+    <ClCompile Include="src\MnSprite.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnGameSystem.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnBootstrap.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MnGameSystemModule.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MnBootstrap.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,20 +98,26 @@
     <ClInclude Include="src\ParticleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\MnGameSystem.h">
+    <ClInclude Include="src\MnSprite.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\MnGameSystemModule.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnGameSystem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnRenderModule.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnBootstrap.h">
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MnSingleton.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="MnSprite.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MnBootstrap.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="src\MnMessageSystem.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "src/MnGameSystem.h"
+#include "MnGameSystem.h"
 
 namespace MNL
 {

@@ -14,19 +14,11 @@ AnimatedSprite::~AnimatedSprite()
 
 }
 
-/*
-set animation sprite sheet from image file
-@param imageFileName : sprite sheet file name in the pacakge or local path. png, bmp, etc.
-*/
 void AnimatedSprite::SetSpriteSheet(std::wstring imageFileName)
 {
 	m_spriteSheet = SpriteManager::GetInstance()->CreateSprite(imageFileName);
 }
 
-/*
-read animation frame data from json
-@param jsonFileName : json file name in the package or local path. it should contain string .json
-*/
 bool AnimatedSprite::SetSheetData(std::wstring jsonFileName)
 {
 	AnimationFrameList* loadedFrames = SpriteManager::GetInstance()->GetFrameList(jsonFileName);
@@ -36,17 +28,12 @@ bool AnimatedSprite::SetSheetData(std::wstring jsonFileName)
 	SetCurrentFrame(0);
 	return true;
 }
-/*
-set loop or not
-*/
+
 void AnimatedSprite::SetLoop(bool isLoop)
 {
 	m_isLoop = isLoop;
 }
-/*
-force to go to the index frame
-@param index : frame index in the bound
-*/
+
 void AnimatedSprite::SetCurrentFrame(int index)
 {
 	if (index >= 0 && index < m_numFrames)
@@ -55,27 +42,20 @@ void AnimatedSprite::SetCurrentFrame(int index)
 		m_spriteSheet.setTextureRect(m_pCurrentFrame->_rect);
 	}
 }
-/*
-go to the next frame of animation. no other operation.
-if it is the last frame of the animation, then go to the start frame
-*/
+
 void AnimatedSprite::GotoNextFrame()
 {
 	int currentIndex = m_pCurrentFrame->_index;
 	SetCurrentFrame((currentIndex + 1) % m_numFrames);
 }
-/*
-stop animation and return to 0 frame
-*/
+
 void AnimatedSprite::Stop()
 {
 	m_isPlaying = false;
 	SetCurrentFrame(0);
 	m_extraTime = sf::Time();
 }
-/*
-pause at current frame
-*/
+
 void AnimatedSprite::Pause()
 {
 	if (m_isPlaying)
@@ -83,9 +63,7 @@ void AnimatedSprite::Pause()
 		m_isPlaying = false;
 	}
 }
-/*
-resume playing animation
-*/
+
 void AnimatedSprite::Play()
 {
 	m_isPlaying = true;
@@ -93,35 +71,23 @@ void AnimatedSprite::Play()
 	m_clock.restart();
 }
 
-/*
-rewind to start frame and play
-*/
 void AnimatedSprite::Rewind()
 {
 	SetCurrentFrame(0);
 	Play();
 }
 
-/*
-check if it is last frame of animation
-*/
 bool AnimatedSprite::IsAtLastFrame()
 {
 	return (m_pCurrentFrame->_index == m_numFrames - 1);
 }
-/*
-check if the animation is playing
-*/
+
 bool AnimatedSprite::IsPlaying()
 {
 	return m_isPlaying;
 }
 
-/*
-animation status updates as time elapsed. 
-if it is not looping, it paused at the last frame after it's duration.
-so when resumed by using play(); starts at the start frame of anmation.
-*/
+
 void AnimatedSprite::Update()
 {
 	if (m_pCurrentFrame == nullptr) return;
@@ -151,13 +117,10 @@ void AnimatedSprite::Update()
 	m_clock.restart();
 }
 
-/*
-render the animation sprite. 
-this function contains update() function itself.
-*/
 void AnimatedSprite::Render(sf::RenderWindow& window)
 {
 	if (m_pCurrentFrame == nullptr) return;
 	Update();
+	
 	window.draw(m_spriteSheet);
 }

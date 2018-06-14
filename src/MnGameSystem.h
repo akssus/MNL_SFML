@@ -4,7 +4,7 @@
 #include <map>
 #include "MnGameSystemModule.h"
 #include "MnSingleton.h"
-#include "../MnBootstrap.h"
+#include "MnBootstrap.h"
 
 namespace MNL
 {
@@ -46,13 +46,19 @@ namespace MNL
 			return HasModule(moduleClassName);
 		}
 
+		void Update();
+
+		void DistributeMessageToModules(const MnMessage* pMessage);
+
 	private:
+		void _UpdateModules();
 		void _FreeAllModules();
+
+
 
 	private:
 		MnBootstrap m_bootstrap;
 		std::map<std::string, std::shared_ptr<MnGameSystemModule> > m_lstModules;
-
 
 	};
 }

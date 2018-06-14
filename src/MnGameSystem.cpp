@@ -2,16 +2,17 @@
 
 using namespace MNL;
 
-MNL::MnGameSystem::MnGameSystem()
+MnGameSystem::MnGameSystem()
 {
+	m_bootstrap.RegisterModules();
 }
 
-MNL::MnGameSystem::~MnGameSystem()
+MnGameSystem::~MnGameSystem()
 {
 	_FreeAllModules();
 }
 
-bool MNL::MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
+bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
 {
 	if (spModule == nullptr) return false;
 
@@ -23,7 +24,7 @@ bool MNL::MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spMod
 	return true;
 }
 
-bool MNL::MnGameSystem::UnregisterModule(const std::string & moduleName)
+bool MnGameSystem::UnregisterModule(const std::string & moduleName)
 {
 	auto it = m_lstModules.find(moduleName);
 	if (it != m_lstModules.end())
@@ -36,7 +37,7 @@ bool MNL::MnGameSystem::UnregisterModule(const std::string & moduleName)
 	return false;
 }
 
-bool MNL::MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule)
+bool MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule)
 {
 	if (spModule == nullptr) return false;
 
@@ -54,10 +55,33 @@ std::shared_ptr<MnGameSystemModule> MNL::MnGameSystem::GetModule(const std::stri
 	return std::shared_ptr<MnGameSystemModule>();
 }
 
-bool MNL::MnGameSystem::HasModule(const std::string & moduleName)
+bool MnGameSystem::HasModule(const std::string & moduleName)
 {
 	auto pModule = GetModule(moduleName);
 	return pModule != nullptr;
+}
+
+void MnGameSystem::Update()
+{
+	_UpdateModules();
+}
+
+void MnGameSystem::DistributeMessageToModules(const MnMessage* pMessage)
+{
+	for(auto& it : m_lstModules)
+	{
+		auto spModule = it.second;
+		spModule->ReceiveMessage(pMessage);
+	}
+}
+
+void MnGameSystem::_UpdateModules()
+{
+	for(auto& it : m_lstModules)
+	{
+		auto spModule = it.second;
+		spModule->Update();
+	}
 }
 
 void MNL::MnGameSystem::_FreeAllModules()
