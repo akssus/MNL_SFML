@@ -159,6 +159,8 @@
     <ClCompile Include="src\MnBootstrap.cpp" />
     <ClCompile Include="src\MnGameSystem.cpp" />
     <ClCompile Include="src\MnGameSystemModule.cpp" />
+    <ClCompile Include="src\MnRenderModule.cpp" />
+    <ClCompile Include="src\MnRenderModuleSFML.cpp" />
     <ClCompile Include="src\MnSprite.cpp" />
     <ClCompile Include="src\ParticleManager.cpp" />
     <ClCompile Include="src\ParticleSystem.cpp" />
@@ -176,6 +178,7 @@
     <ClInclude Include="src\MnGameSystemModule.h" />
     <ClInclude Include="src\MnMessageSystem.h" />
     <ClInclude Include="src\MnRenderModule.h" />
+    <ClInclude Include="src\MnRenderModuleSFML.h" />
     <ClInclude Include="src\MnSingleton.h" />
     <ClInclude Include="src\MnSprite.h" />
     <ClInclude Include="src\ParticleManager.h" />

@@ -28,6 +28,12 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{5e6693ca-cbea-4571-817d-fe4f325de49c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Rendering">
+      <UniqueIdentifier>{8e1fb0bd-9c88-46b6-80e3-f07c60d25ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visual">
+      <UniqueIdentifier>{bec34fb0-e36e-4c0a-bfb5-50e60d0d4c00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,9 +63,6 @@
     <ClCompile Include="src\ParticleManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\MnSprite.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\MnGameSystem.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -68,6 +71,15 @@
     </ClCompile>
     <ClCompile Include="src\MnGameSystemModule.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnRenderModule.cpp">
+      <Filter>Modules\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnRenderModuleSFML.cpp">
+      <Filter>Modules\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnSprite.cpp">
+      <Filter>Visual</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,17 +110,11 @@
     <ClInclude Include="src\ParticleManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\MnSprite.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\MnGameSystemModule.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MnGameSystem.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MnRenderModule.h">
-      <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="src\MnBootstrap.h">
       <Filter>Core</Filter>
@@ -118,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="src\MnMessageSystem.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnRenderModule.h">
+      <Filter>Modules\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnRenderModuleSFML.h">
+      <Filter>Modules\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnSprite.h">
+      <Filter>Visual</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
