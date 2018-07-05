@@ -81,6 +81,9 @@
     <ClCompile Include="src\MnSprite.cpp">
       <Filter>Visual</Filter>
     </ClCompile>
+    <ClCompile Include="src\MnBootstrapSFML.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SpriteManager.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="src\MnSprite.h">
       <Filter>Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnBootstrapSFML.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

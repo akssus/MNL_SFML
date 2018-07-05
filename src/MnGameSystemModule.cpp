@@ -1,5 +1,6 @@
 #include "MnGameSystemModule.h"
 #include "MnGameSystem.h"
+#include <algorithm>
 
 void MNL::MnMessage::Dispatch()
 {
@@ -15,7 +16,7 @@ void MNL::MnMessageReceiver::ReceiveMessage(const MnMessage* pMessage)
 	}
 }
 
-MNL::MnGameSystemModule::MnGameSystemModule()
+MNL::MnGameSystemModule::MnGameSystemModule() : m_moduleOrder(5000)
 {
 	
 }
@@ -28,6 +29,17 @@ MNL::MnGameSystemModule::~MnGameSystemModule()
 void MNL::MnGameSystemModule::ReceiveMessage(const MnMessage* pMessage)
 {
 	m_messageReceiver.ReceiveMessage(pMessage);
+}
+
+void MNL::MnGameSystemModule::SetModuleOrder(int32_t order)
+{
+	order = std::max(order, 0);
+	m_moduleOrder = order;
+}
+
+int32_t MNL::MnGameSystemModule::GetModuleOrder()
+{
+	return m_moduleOrder;
 }
 
 void MNL::MnGameSystemModule::_RegisterSelf()

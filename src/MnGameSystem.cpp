@@ -1,15 +1,27 @@
 #include "MnGameSystem.h"
+#include <algorithm>
 
 using namespace MNL;
 
 MnGameSystem::MnGameSystem()
 {
-	m_bootstrap.RegisterModules();
+	
 }
 
 MnGameSystem::~MnGameSystem()
 {
 	_FreeAllModules();
+}
+
+bool MnGameSystem::Boot()
+{
+	if(m_spBootstrap != nullptr)
+	{
+		m_spBootstrap->RegisterModules();
+
+		return true;
+	}
+	return false;
 }
 
 bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
@@ -18,6 +30,8 @@ bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
 
 	const std::string moduleClassName = typeid(*spModule).name();
 	m_lstModules[moduleClassName] = spModule;
+
+	_SortModules();
 
 	spModule->OnRegistered();
 
@@ -45,7 +59,7 @@ bool MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule
 	return UnregisterModule(moduleClassName);
 }
 
-std::shared_ptr<MnGameSystemModule> MNL::MnGameSystem::GetModule(const std::string & moduleName)
+std::shared_ptr<MnGameSystemModule> MnGameSystem::GetModule(const std::string & moduleName)
 {
 	auto it = m_lstModules.find(moduleName);
 	if (it != m_lstModules.end())
@@ -84,7 +98,7 @@ void MnGameSystem::_UpdateModules()
 	}
 }
 
-void MNL::MnGameSystem::_FreeAllModules()
+void MnGameSystem::_FreeAllModules()
 {
 	auto it = m_lstModules.begin();
 	while (it != m_lstModules.end())
@@ -93,4 +107,15 @@ void MNL::MnGameSystem::_FreeAllModules()
 		it->second->OnUnregistering();
 	}
 	m_lstModules.clear();
+}
+
+void MnGameSystem::_SortModules()
+{
+	auto comp = [](std::pair<std::string, std::shared_ptr<MnGameSystemModule>>& keyA, std::pair<std::string, std::shared_ptr<MnGameSystemModule>>& keyB)
+	{
+		auto spModuleA = keyA.second;
+		auto spModuleB = keyB.second;
+		return spModuleA->GetModuleOrder() > spModuleB->GetModuleOrder();
+	};
+	std::sort(m_lstModules.begin(), m_lstModules.end(), comp);
 }

@@ -56,11 +56,16 @@ namespace MNL
 		}
 		void ReceiveMessage(const MnMessage* pMessage);
 
+		void SetModuleOrder(int32_t order);
+		int32_t GetModuleOrder();
+		
+
 	private:
 		[[deprecated]] void _RegisterSelf();
 		void _UnregisterSelf();
 
 	private:
 		MnMessageReceiver m_messageReceiver;
+		int32_t m_moduleOrder; /// 낮을수록 우선순위가 높음
 	};
 }

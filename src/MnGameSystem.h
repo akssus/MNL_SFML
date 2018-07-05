@@ -14,10 +14,12 @@ namespace MNL
 		MnGameSystem();
 		~MnGameSystem();
 
-		bool RegisterModule(std::shared_ptr<MnGameSystemModule> pModule);
+		bool Boot();
+
+		bool RegisterModule(std::shared_ptr<MnGameSystemModule> spModule);
 
 		bool UnregisterModule(const std::string& moduleName);
-		bool UnregisterModule(std::shared_ptr<MnGameSystemModule> pModule);
+		bool UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule);
 
 		template <typename T>
 		bool UnregisterModule()
@@ -50,14 +52,14 @@ namespace MNL
 
 		void DistributeMessageToModules(const MnMessage* pMessage);
 
-	private:
+	protected:
 		void _UpdateModules();
 		void _FreeAllModules();
+		void _SortModules();
 
 
-
-	private:
-		MnBootstrap m_bootstrap;
+	protected:
+		std::shared_ptr<MnBootstrap> m_spBootstrap;
 		std::map<std::string, std::shared_ptr<MnGameSystemModule> > m_lstModules;
 
 	};

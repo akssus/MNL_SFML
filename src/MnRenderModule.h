@@ -1,3 +1,8 @@
+/*
+* 렌더모듈은 말그대로 렌더링을 담당합니당
+* 게임시스템 모듈중 필수적인놈
+*/
+
 #pragma once
 #include "MnGameSystemModule.h"
 #include <queue>
@@ -17,7 +22,7 @@ namespace MNL
 		virtual void Render(const std::shared_ptr<MnRenderable>& spRenderable) = 0;
 	};
 
-	class MnRenderModule : MnGameSystemModule
+	class MnRenderModule : public MnGameSystemModule
 	{
 	public:
 		void SetRenderer(const std::shared_ptr<MnRenderer>& spRenderer);

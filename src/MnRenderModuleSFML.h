@@ -1,3 +1,8 @@
+/*
+ * SFML 전용 렌더모듈
+ *
+ */
+
 #pragma once
 #include "MnRenderModule.h"
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -22,7 +27,7 @@ namespace MNL
 		sf::RenderWindow* m_pRenderWindow;
 	};
 
-	class MnRenderModuleSFML : MnRenderModule
+	class MnRenderModuleSFML : public MnRenderModule
 	{
 	public:
 		void OnRegistered() override;
