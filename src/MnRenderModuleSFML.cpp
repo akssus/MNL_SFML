@@ -19,22 +19,35 @@ void MnRendererSFML::SetRenderWindow(sf::RenderWindow* pRenderWindow)
 	}
 }
 
-void MnRendererSFML::Render(const std::shared_ptr<MnRenderable>& spRenderable)
+void MnRendererSFML::Render(const std::shared_ptr<MnRenderableSFML>& spRenderable)
 {
-	if(m_pRenderWindow && spRenderable != nullptr)
+	if (spRenderable != nullptr)
 	{
-		auto sfmlRenderable = std::dynamic_pointer_cast<MnRenderableSFML, MnRenderable>(spRenderable);
-		if (sfmlRenderable != nullptr)
-		{
-			if (sfmlRenderable->m_spDrawable != nullptr)
-			{
-				m_pRenderWindow->draw(*(sfmlRenderable->m_spDrawable));
-			}
-		}
+		m_pRenderWindow->draw(*(spRenderable->m_spDrawable));
 	}
 }
 
-void MnRenderModuleSFML::OnRegistered()
+MnRenderModuleSFML::MnRenderModuleSFML() : m_spRenderer(std::make_shared<MnRendererSFML>())
 {
-	SetRenderer(std::static_pointer_cast<MnRenderer>(std::make_shared<MnRendererSFML>()));
 }
+
+void MnRenderModuleSFML::AddQueue(const std::shared_ptr<MnRenderable>& spRenderable)
+{
+	auto spRenderableSFML = std::dynamic_pointer_cast<MnRenderableSFML>(spRenderable);
+	if (spRenderableSFML != nullptr)
+	{
+		m_renderQueue.push_back(spRenderableSFML);
+	}
+}
+
+void MnRenderModuleSFML::Render()
+{
+	if (m_spRenderer != nullptr)
+	{
+		std::for_each(m_renderQueue.begin(), m_renderQueue.end(), [](auto& spRenderable)
+		{
+				m_spRenderer->Render(spRenderable);
+		});
+	}
+}
+

@@ -6,6 +6,7 @@
 #pragma once
 #include "MnRenderModule.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <vector>
 
 namespace MNL
 {
@@ -21,7 +22,7 @@ namespace MNL
 	public:
 		MnRendererSFML();
 		void SetRenderWindow(sf::RenderWindow* pRenderWindow);
-		void Render(const std::shared_ptr<MnRenderable>& spRenderable) override;
+		void Render(const std::shared_ptr<MnRenderableSFML>& spRenderable);
 
 	private:
 		sf::RenderWindow* m_pRenderWindow;
@@ -30,7 +31,14 @@ namespace MNL
 	class MnRenderModuleSFML : public MnRenderModule
 	{
 	public:
-		void OnRegistered() override;
+		MnRenderModuleSFML();
 
+	public:
+		void AddQueue(const std::shared_ptr<MnRenderable>& spRenderable) override;
+		void Render() override;
+
+	private:
+		std::shared_ptr<MnRendererSFML> m_spRenderer;
+		std::vector<std::shared_ptr<MnRenderableSFML>> m_renderQueue;
 	};
 }

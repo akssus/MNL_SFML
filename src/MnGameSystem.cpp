@@ -3,7 +3,7 @@
 
 using namespace MNL;
 
-MnGameSystem::MnGameSystem()
+MnGameSystem::MnGameSystem() : m_orderAllocator(MN_GAMESYSTEM_MODULE_ID_RANGE_FROM, MN_GAMESYSTEM_MODULE_ID_RANGE_TO)
 {
 	
 }
@@ -24,12 +24,21 @@ bool MnGameSystem::Boot()
 	return false;
 }
 
-bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule)
+bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule, MnUINT32_ID moduleOrderMin)
 {
 	if (spModule == nullptr) return false;
 
+	if(m_orderAllocator.IsFull())
+	{
+		//DebugLogger.Print("더이상 할당될 수 있는 모듈 자리가 없습니다")
+		return false;
+	}
+
 	const std::string moduleClassName = typeid(*spModule).name();
 	m_lstModules[moduleClassName] = spModule;
+
+	auto allocatedOrder = m_orderAllocator.AllocateAbove(moduleOrderMin);
+	spModule->SetModuleOrder(allocatedOrder);
 
 	_SortModules();
 

@@ -34,6 +34,9 @@
     <Filter Include="Visual">
       <UniqueIdentifier>{bec34fb0-e36e-4c0a-bfb5-50e60d0d4c00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{ea31fb00-267d-459a-8729-fa8a1dc754e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="src\MnBootstrapSFML.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnIdentifierAllocator.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="src\MnBootstrapSFML.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnIdentifierAllocator.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

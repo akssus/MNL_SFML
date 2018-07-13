@@ -5,6 +5,11 @@
 #include "MnGameSystemModule.h"
 #include "MnSingleton.h"
 #include "MnBootstrap.h"
+#include "MnIdentifierAllocator.h"
+
+
+#define MN_GAMESYSTEM_MODULE_ID_RANGE_FROM 0
+#define MN_GAMESYSTEM_MODULE_ID_RANGE_TO 5000
 
 namespace MNL
 {
@@ -16,7 +21,8 @@ namespace MNL
 
 		bool Boot();
 
-		bool RegisterModule(std::shared_ptr<MnGameSystemModule> spModule);
+		//오더를 moduleOrderMin 이상부터 찾아 할당.
+		bool RegisterModule(std::shared_ptr<MnGameSystemModule> spModule, MnUINT32_ID moduleOrderMin = MN_GAMESYSTEM_MODULE_ID_RANGE_FROM);
 
 		bool UnregisterModule(const std::string& moduleName);
 		bool UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule);
@@ -61,6 +67,8 @@ namespace MNL
 	protected:
 		std::shared_ptr<MnBootstrap> m_spBootstrap;
 		std::map<std::string, std::shared_ptr<MnGameSystemModule> > m_lstModules;
+
+		MnIdentifierAllocator m_orderAllocator;
 
 	};
 }

@@ -160,6 +160,7 @@
     <ClCompile Include="src\MnBootstrapSFML.cpp" />
     <ClCompile Include="src\MnGameSystem.cpp" />
     <ClCompile Include="src\MnGameSystemModule.cpp" />
+    <ClCompile Include="src\MnIdentifierAllocator.cpp" />
     <ClCompile Include="src\MnRenderModule.cpp" />
     <ClCompile Include="src\MnRenderModuleSFML.cpp" />
     <ClCompile Include="src\MnSprite.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\MnBootstrapSFML.h" />
     <ClInclude Include="src\MnGameSystem.h" />
     <ClInclude Include="src\MnGameSystemModule.h" />
+    <ClInclude Include="src\MnIdentifierAllocator.h" />
     <ClInclude Include="src\MnMessageSystem.h" />
     <ClInclude Include="src\MnRenderModule.h" />
     <ClInclude Include="src\MnRenderModuleSFML.h" />
