@@ -1,4 +1,6 @@
 #include "MnRenderModuleSFML.h"
+#include "MnGameSystem.h"
+#include "MnSFMLModule.h"
 
 using namespace MNL;
 
@@ -29,6 +31,16 @@ void MnRendererSFML::Render(const std::shared_ptr<MnRenderableSFML>& spRenderabl
 
 MnRenderModuleSFML::MnRenderModuleSFML() : m_spRenderer(std::make_shared<MnRendererSFML>())
 {
+	auto sfmlModule = MnGameSystem::GetInstance()->GetModule<MnSFMLModule>();
+	if(sfmlModule != nullptr)
+	{
+		m_spRenderer = sfmlModule->GetRenderWindow();
+	}
+}
+
+void MnRenderModuleSFML::SetRenderer(const std::shared_ptr<MnRendererSFML>& spRenderer)
+{
+	m_spRenderer = spRenderer;
 }
 
 void MnRenderModuleSFML::AddQueue(const std::shared_ptr<MnRenderable>& spRenderable)

@@ -28,14 +28,26 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{5e6693ca-cbea-4571-817d-fe4f325de49c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Rendering">
-      <UniqueIdentifier>{8e1fb0bd-9c88-46b6-80e3-f07c60d25ffc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Visual">
       <UniqueIdentifier>{bec34fb0-e36e-4c0a-bfb5-50e60d0d4c00}</UniqueIdentifier>
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{ea31fb00-267d-459a-8729-fa8a1dc754e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Sound">
+      <UniqueIdentifier>{c6b4ea20-f044-4165-beb0-1c75971890a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Update">
+      <UniqueIdentifier>{c3ea9fc6-1452-4216-b975-21e0185cd8a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Render">
+      <UniqueIdentifier>{8e1fb0bd-9c88-46b6-80e3-f07c60d25ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Input">
+      <UniqueIdentifier>{03d5cdfd-82ef-49a8-a65d-1205c0fde88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Platform">
+      <UniqueIdentifier>{2bfc5c3d-93bc-4bb7-b6a1-eeb45c716ee6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,10 +88,10 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MnRenderModule.cpp">
-      <Filter>Modules\Rendering</Filter>
+      <Filter>Modules\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\MnRenderModuleSFML.cpp">
-      <Filter>Modules\Rendering</Filter>
+      <Filter>Modules\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\MnSprite.cpp">
       <Filter>Visual</Filter>
@@ -89,6 +101,24 @@
     </ClCompile>
     <ClCompile Include="src\MnIdentifierAllocator.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnGameUpdateModule.cpp">
+      <Filter>Modules\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnInputModule.cpp">
+      <Filter>Modules\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnGameObjectComponent.cpp">
+      <Filter>Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnGameObject.cpp">
+      <Filter>Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnSFMLModule.cpp">
+      <Filter>Modules\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnMessageSystem.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +165,10 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MnRenderModule.h">
-      <Filter>Modules\Rendering</Filter>
+      <Filter>Modules\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\MnRenderModuleSFML.h">
-      <Filter>Modules\Rendering</Filter>
+      <Filter>Modules\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\MnSprite.h">
       <Filter>Visual</Filter>
@@ -148,6 +178,21 @@
     </ClInclude>
     <ClInclude Include="src\MnIdentifierAllocator.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnGameUpdateModule.h">
+      <Filter>Modules\Update</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnInputModule.h">
+      <Filter>Modules\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnGameObject.h">
+      <Filter>Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnGameObjectComponent.h">
+      <Filter>Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnSFMLModule.h">
+      <Filter>Modules\Platform</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

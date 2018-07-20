@@ -2,47 +2,35 @@
 #include "MnGameSystem.h"
 #include <algorithm>
 
-void MNL::MnMessage::Dispatch()
+using namespace MNL;
+
+MnGameSystemModule::MnGameSystemModule() : m_moduleOrder(5000)
 {
-	MnGameSystem::GetInstance()->DistributeMessageToModules(this);
+	m_spMessageReceiver = std::make_shared<MnMessageReceiver>();
 }
 
-void MNL::MnMessageReceiver::ReceiveMessage(const MnMessage* pMessage)
-{
-	std::string key = typeid(*pMessage).name();
-	if (m_tblHandlers.find(key) != m_tblHandlers.end())
-	{
-		m_tblHandlers[key](pMessage);
-	}
-}
-
-MNL::MnGameSystemModule::MnGameSystemModule() : m_moduleOrder(5000)
-{
-	
-}
-
-MNL::MnGameSystemModule::~MnGameSystemModule()
+MnGameSystemModule::~MnGameSystemModule()
 {
 	_UnregisterSelf();
 }
 
-void MNL::MnGameSystemModule::ReceiveMessage(const MnMessage* pMessage)
+std::shared_ptr<MnMessageReceiver> MnGameSystemModule::GetMessageReceiver()
 {
-	m_messageReceiver.ReceiveMessage(pMessage);
+	return m_spMessageReceiver;
 }
 
-void MNL::MnGameSystemModule::SetModuleOrder(int32_t order)
+void MnGameSystemModule::SetModuleOrder(int32_t order)
 {
 	order = std::max(order, 0);
 	m_moduleOrder = order;
 }
 
-int32_t MNL::MnGameSystemModule::GetModuleOrder()
+int32_t MnGameSystemModule::GetModuleOrder()
 {
 	return m_moduleOrder;
 }
 
-void MNL::MnGameSystemModule::_RegisterSelf()
+void MnGameSystemModule::_RegisterSelf()
 {
 	auto pGameSystem = MnGameSystem::GetInstance();
 	if (pGameSystem != nullptr)
@@ -51,11 +39,11 @@ void MNL::MnGameSystemModule::_RegisterSelf()
 	}
 }
 
-void MNL::MnGameSystemModule::_UnregisterSelf()
+void MnGameSystemModule::_UnregisterSelf()
 {
 	auto pGameSystem = MnGameSystem::GetInstance();
 	if (pGameSystem != nullptr)
 	{
-		pGameSystem->UnregisterModule(typeid(*this).name());
+		pGameSystem->UnregisterModule(typeid(*this).raw_name());
 	}
 }

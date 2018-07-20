@@ -34,7 +34,7 @@ bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule, 
 		return false;
 	}
 
-	const std::string moduleClassName = typeid(*spModule).name();
+	const std::string moduleClassName = typeid(*spModule).raw_name();
 	m_lstModules[moduleClassName] = spModule;
 
 	auto allocatedOrder = m_orderAllocator.AllocateAbove(moduleOrderMin);
@@ -64,7 +64,7 @@ bool MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule
 {
 	if (spModule == nullptr) return false;
 
-	std::string moduleClassName = typeid(*spModule).name();
+	std::string moduleClassName = typeid(*spModule).raw_name();
 	return UnregisterModule(moduleClassName);
 }
 
@@ -89,13 +89,10 @@ void MnGameSystem::Update()
 	_UpdateModules();
 }
 
-void MnGameSystem::DistributeMessageToModules(const MnMessage* pMessage)
+void MnGameSystem::DistributeMessage(const MnMessage* pMessage)
 {
-	for(auto& it : m_lstModules)
-	{
-		auto spModule = it.second;
-		spModule->ReceiveMessage(pMessage);
-	}
+	auto msgKey = typeid(*pMessage).raw_name();
+	m_messageSystem.Distribute(msgKey, pMessage);
 }
 
 void MnGameSystem::_UpdateModules()

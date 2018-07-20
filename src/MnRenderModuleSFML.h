@@ -10,14 +10,14 @@
 
 namespace MNL
 {
-	class MnRenderableSFML : MnRenderable
+	class MnRenderableSFML : public MnRenderable
 	{
 	public:
 		MnRenderableSFML();
 		std::shared_ptr<sf::Drawable> m_spDrawable;
 	};
 
-	class MnRendererSFML : MnRenderer
+	class MnRendererSFML : public MnRenderer
 	{
 	public:
 		MnRendererSFML();
@@ -34,6 +34,7 @@ namespace MNL
 		MnRenderModuleSFML();
 
 	public:
+		void SetRenderer(const std::shared_ptr<MnRendererSFML>& spRenderer);
 		void AddQueue(const std::shared_ptr<MnRenderable>& spRenderable) override;
 		void Render() override;
 

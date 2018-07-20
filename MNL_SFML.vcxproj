@@ -70,7 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>$(VC_SourcePath)/src;</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>$(VC_SourcePath)/src;</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -158,11 +163,17 @@
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\MnBootstrap.cpp" />
     <ClCompile Include="src\MnBootstrapSFML.cpp" />
+    <ClCompile Include="src\MnGameObject.cpp" />
+    <ClCompile Include="src\MnGameObjectComponent.cpp" />
     <ClCompile Include="src\MnGameSystem.cpp" />
     <ClCompile Include="src\MnGameSystemModule.cpp" />
+    <ClCompile Include="src\MnGameUpdateModule.cpp" />
     <ClCompile Include="src\MnIdentifierAllocator.cpp" />
+    <ClCompile Include="src\MnInputModule.cpp" />
+    <ClCompile Include="src\MnMessageSystem.cpp" />
     <ClCompile Include="src\MnRenderModule.cpp" />
     <ClCompile Include="src\MnRenderModuleSFML.cpp" />
+    <ClCompile Include="src\MnSFMLModule.cpp" />
     <ClCompile Include="src\MnSprite.cpp" />
     <ClCompile Include="src\ParticleManager.cpp" />
     <ClCompile Include="src\ParticleSystem.cpp" />
@@ -177,12 +188,17 @@
     <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\MnBootstrap.h" />
     <ClInclude Include="src\MnBootstrapSFML.h" />
+    <ClInclude Include="src\MnGameObject.h" />
+    <ClInclude Include="src\MnGameObjectComponent.h" />
     <ClInclude Include="src\MnGameSystem.h" />
     <ClInclude Include="src\MnGameSystemModule.h" />
+    <ClInclude Include="src\MnGameUpdateModule.h" />
     <ClInclude Include="src\MnIdentifierAllocator.h" />
+    <ClInclude Include="src\MnInputModule.h" />
     <ClInclude Include="src\MnMessageSystem.h" />
     <ClInclude Include="src\MnRenderModule.h" />
     <ClInclude Include="src\MnRenderModuleSFML.h" />
+    <ClInclude Include="src\MnSFMLModule.h" />
     <ClInclude Include="src\MnSingleton.h" />
     <ClInclude Include="src\MnSprite.h" />
     <ClInclude Include="src\ParticleManager.h" />
