@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "MnGameObjectComponent.h"
+#include <memory>
 
 
 namespace MNL
@@ -19,6 +20,7 @@ namespace MNL
 		void OnDestroy() override;
 
 	private:
-		std::vector<MnGameObjectComponent> m_lstComponents;
+		std::shared_ptr<Mn
+			std::vector<MnGameObjectComponent> m_lstComponents;
 	};
 }

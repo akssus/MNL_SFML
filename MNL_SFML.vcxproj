@@ -163,6 +163,7 @@
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\MnBootstrap.cpp" />
     <ClCompile Include="src\MnBootstrapSFML.cpp" />
+    <ClCompile Include="src\MnDebugModule.cpp" />
     <ClCompile Include="src\MnGameObject.cpp" />
     <ClCompile Include="src\MnGameObjectComponent.cpp" />
     <ClCompile Include="src\MnGameSystem.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="src\MnGameUpdateModule.cpp" />
     <ClCompile Include="src\MnIdentifierAllocator.cpp" />
     <ClCompile Include="src\MnInputModule.cpp" />
+    <ClCompile Include="src\MnInputModuleSFML.cpp" />
     <ClCompile Include="src\MnMessageSystem.cpp" />
     <ClCompile Include="src\MnRenderModule.cpp" />
     <ClCompile Include="src\MnRenderModuleSFML.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\SpriteManager.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\zip_utils\unzip.cpp" />
     <ClCompile Include="src\zip_utils\zip.cpp" />
   </ItemGroup>
@@ -188,6 +191,7 @@
     <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\MnBootstrap.h" />
     <ClInclude Include="src\MnBootstrapSFML.h" />
+    <ClInclude Include="src\MnDebugModule.h" />
     <ClInclude Include="src\MnGameObject.h" />
     <ClInclude Include="src\MnGameObjectComponent.h" />
     <ClInclude Include="src\MnGameSystem.h" />
@@ -195,6 +199,7 @@
     <ClInclude Include="src\MnGameUpdateModule.h" />
     <ClInclude Include="src\MnIdentifierAllocator.h" />
     <ClInclude Include="src\MnInputModule.h" />
+    <ClInclude Include="src\MnInputModuleSFML.h" />
     <ClInclude Include="src\MnMessageSystem.h" />
     <ClInclude Include="src\MnRenderModule.h" />
     <ClInclude Include="src\MnRenderModuleSFML.h" />
@@ -203,9 +208,11 @@
     <ClInclude Include="src\MnSprite.h" />
     <ClInclude Include="src\ParticleManager.h" />
     <ClInclude Include="src\ParticleSystem.h" />
+    <ClInclude Include="src\Position.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\SpriteManager.h" />
+    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\zip_utils\unzip.h" />
     <ClInclude Include="src\zip_utils\zip.h" />
   </ItemGroup>
