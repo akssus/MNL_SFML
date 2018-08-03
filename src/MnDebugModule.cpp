@@ -1,5 +1,6 @@
 #include "MnDebugModule.h"
 #include <chrono>
+#include <time.h>
 #include <ctime>
 #include <string>
 #include <fstream>
@@ -21,6 +22,14 @@ void MnDebugModule::Update()
 		const auto filePath = LOGFILE_ROOT + _LogFileNameByTime();
 		_FlushLogsToFile(filePath);
 	}
+}
+
+void MnDebugModule::OnRegistered()
+{
+}
+
+void MnDebugModule::OnUnregistering()
+{
 }
 
 void MnDebugModule::_ResetTimer()

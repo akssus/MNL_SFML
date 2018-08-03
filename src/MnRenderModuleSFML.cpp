@@ -9,15 +9,15 @@ MnRenderableSFML::MnRenderableSFML() : m_spDrawable(std::shared_ptr<sf::Drawable
 {
 }
 
-MnRendererSFML::MnRendererSFML():m_pRenderWindow(nullptr)
+MnRendererSFML::MnRendererSFML()
 {
 }
 
-void MnRendererSFML::SetRenderWindow(sf::RenderWindow* pRenderWindow)
+void MnRendererSFML::SetRenderWindow(const std::shared_ptr<sf::RenderWindow>& spRenderWindow)
 {
-	if(pRenderWindow != nullptr)
+	if(spRenderWindow != nullptr)
 	{
-		m_pRenderWindow = pRenderWindow;
+		m_spRenderWindow = spRenderWindow;
 	}
 }
 
@@ -25,7 +25,7 @@ void MnRendererSFML::Render(const std::shared_ptr<MnRenderableSFML>& spRenderabl
 {
 	if (spRenderable != nullptr)
 	{
-		m_pRenderWindow->draw(*(spRenderable->m_spDrawable));
+		m_spRenderWindow->draw(*(spRenderable->m_spDrawable));
 	}
 }
 
@@ -34,8 +34,20 @@ MnRenderModuleSFML::MnRenderModuleSFML() : m_spRenderer(std::make_shared<MnRende
 	auto sfmlModule = MnGameSystem::GetInstance()->GetModule<MnSFMLModule>();
 	if(sfmlModule != nullptr)
 	{
-		m_spRenderer = sfmlModule->GetRenderWindow();
+		m_spRenderer->SetRenderWindow(sfmlModule->GetRenderWindow());
 	}
+}
+
+void MnRenderModuleSFML::OnRegistered()
+{
+}
+
+void MnRenderModuleSFML::OnUnregistering()
+{
+}
+
+void MnRenderModuleSFML::Update()
+{
 }
 
 void MnRenderModuleSFML::SetRenderer(const std::shared_ptr<MnRendererSFML>& spRenderer)
@@ -56,9 +68,9 @@ void MnRenderModuleSFML::Render()
 {
 	if (m_spRenderer != nullptr)
 	{
-		std::for_each(m_renderQueue.begin(), m_renderQueue.end(), [](auto& spRenderable)
+		std::for_each(m_renderQueue.begin(), m_renderQueue.end(), [&](const std::shared_ptr<MnRenderableSFML>& spRenderable)
 		{
-				m_spRenderer->Render(spRenderable);
+			m_spRenderer->Render(spRenderable);
 		});
 	}
 }

@@ -10,14 +10,14 @@ namespace MNL
 		MnGameSystemModule();
 		virtual ~MnGameSystemModule();
 
-		virtual void OnRegistered() = 0;
-		virtual void OnUnregistering() = 0;
-		virtual void Update() = 0;
+		virtual void OnRegistered();
+		virtual void OnUnregistering();
+		virtual void Update();
 
 		std::shared_ptr<MnMessageReceiver> GetMessageReceiver();
 
 		void SetModuleOrder(int32_t order);
-		int32_t GetModuleOrder();
+		int32_t GetModuleOrder() const;
 		
 
 	private:

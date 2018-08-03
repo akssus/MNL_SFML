@@ -70,7 +70,7 @@ uint32_t MnIdentifierAllocator::PoolSize()
 void MnIdentifierAllocator::Reset()
 {
 	std::for_each(m_lstIdentifiers.begin(), m_lstIdentifiers.end(), 
-		[](auto& state)
+		[](MnIdentifierState& state)
 		{
 			state = MN_ID_UNALLOCATED;
 		}
@@ -104,7 +104,7 @@ MnUINT32_ID MnIdentifierAllocator::_FindUnallocated(MnUINT32_ID from, MnUINT32_I
 
 	if(it != m_lstIdentifiers.end())
 	{
-		auto index = std::distance(m_lstIdentifiers.begin(), it);
+		uint32_t index = std::distance(m_lstIdentifiers.begin(), it);
 		return _ConvertToID(index);
 	}
 

@@ -72,9 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <SourcePath>$(VC_SourcePath)/src;</SourcePath>
+    <OutDir>C:\MNL_SFML\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <SourcePath>$(VC_SourcePath)/src;</SourcePath>
+    <OutDir>C:\MNL_SFML\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -160,7 +162,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AnimatedSprite.cpp" />
+    <ClCompile Include="src\GameObjectFactory.cpp" />
     <ClCompile Include="src\MnBootstrap.cpp" />
     <ClCompile Include="src\MnBootstrapSFML.cpp" />
     <ClCompile Include="src\MnDebugModule.cpp" />
@@ -172,23 +174,18 @@
     <ClCompile Include="src\MnIdentifierAllocator.cpp" />
     <ClCompile Include="src\MnInputModule.cpp" />
     <ClCompile Include="src\MnInputModuleSFML.cpp" />
+    <ClCompile Include="src\MnMath.cpp" />
     <ClCompile Include="src\MnMessageSystem.cpp" />
     <ClCompile Include="src\MnRenderModule.cpp" />
     <ClCompile Include="src\MnRenderModuleSFML.cpp" />
     <ClCompile Include="src\MnSFMLModule.cpp" />
     <ClCompile Include="src\MnSprite.cpp" />
-    <ClCompile Include="src\ParticleManager.cpp" />
-    <ClCompile Include="src\ParticleSystem.cpp" />
-    <ClCompile Include="src\ResourceManager.cpp" />
-    <ClCompile Include="src\SoundManager.cpp" />
-    <ClCompile Include="src\SpriteManager.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\Transform.cpp" />
-    <ClCompile Include="src\zip_utils\unzip.cpp" />
-    <ClCompile Include="src\zip_utils\zip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObjectFactory.h" />
     <ClInclude Include="src\jsonnlohmann\json.hpp" />
-    <ClInclude Include="src\AnimatedSprite.h" />
     <ClInclude Include="src\MnBootstrap.h" />
     <ClInclude Include="src\MnBootstrapSFML.h" />
     <ClInclude Include="src\MnDebugModule.h" />
@@ -200,21 +197,15 @@
     <ClInclude Include="src\MnIdentifierAllocator.h" />
     <ClInclude Include="src\MnInputModule.h" />
     <ClInclude Include="src\MnInputModuleSFML.h" />
+    <ClInclude Include="src\MnMath.h" />
     <ClInclude Include="src\MnMessageSystem.h" />
     <ClInclude Include="src\MnRenderModule.h" />
     <ClInclude Include="src\MnRenderModuleSFML.h" />
     <ClInclude Include="src\MnSFMLModule.h" />
     <ClInclude Include="src\MnSingleton.h" />
     <ClInclude Include="src\MnSprite.h" />
-    <ClInclude Include="src\ParticleManager.h" />
-    <ClInclude Include="src\ParticleSystem.h" />
-    <ClInclude Include="src\Position.h" />
-    <ClInclude Include="src\ResourceManager.h" />
-    <ClInclude Include="src\SoundManager.h" />
-    <ClInclude Include="src\SpriteManager.h" />
+    <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\Transform.h" />
-    <ClInclude Include="src\zip_utils\unzip.h" />
-    <ClInclude Include="src\zip_utils\zip.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

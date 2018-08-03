@@ -63,7 +63,7 @@ namespace MNL
 	private:
 		MnIdentifierAllocator m_idAllocator;
 		MnIdentifierAllocator m_orderAllocator;
-		std::vector<MnUpdatableContainer> m_lstUpdatables;
+		std::vector<MnUpdatableContainer> m_lstUpdatableContainers;
 		
 	};
 }

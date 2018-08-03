@@ -13,7 +13,9 @@ namespace MNL
 		MnSFMLModule(uint32_t windowWidth, uint32_t windowHeight, std::string title);
 		virtual ~MnSFMLModule();
 
+		void Update() override;
 		void OnRegistered() override;
+		void OnUnregistering() override;
 
 		std::shared_ptr<sf::RenderWindow> GetRenderWindow();
 

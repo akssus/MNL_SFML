@@ -1,19 +1,14 @@
 #pragma once
 #include <memory>
-#include "MnGameSystem.h"
-
 namespace MNL
 {
+	class MnGameSystem;
 	class MnBootstrap
 	{
 	public:
-		MnBootstrap();
-		virtual ~MnBootstrap();
+		virtual ~MnBootstrap() = default;
 
 		//오버라이드 해서 조립합시다
-		virtual void RegisterModules() = 0;
-
-	protected:
-		std::shared_ptr<MnGameSystem> m_spGameSystem;
+		virtual void RegisterModules(MnGameSystem& gameSystem) = 0;
 	};
 }

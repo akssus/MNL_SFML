@@ -34,6 +34,18 @@ const MnInputUnit MnInputMapper::Get(const std::string& keyName)
 	return MnInputUnit();
 }
 
+void MnInputModule::OnRegistered()
+{
+}
+
+void MnInputModule::OnUnregistering()
+{
+}
+
+void MnInputModule::Update()
+{
+}
+
 void MnInputModule::Register(const std::string& keyName, uint32_t keyCode)
 {
 	m_inputMapper.Register(keyName, keyCode);

@@ -18,6 +18,8 @@ namespace MNL
 		void WriteLog(const std::string& log, MnDebugLogLevel logLevel);
 		//일정 주기로 Flush한다
 		void Update() override;
+		void OnRegistered() override;
+		void OnUnregistering() override;
 
 	private:
 		void _ResetTimer();

@@ -21,11 +21,11 @@ namespace MNL
 	{
 	public:
 		MnRendererSFML();
-		void SetRenderWindow(sf::RenderWindow* pRenderWindow);
+		void SetRenderWindow(const std::shared_ptr<sf::RenderWindow>&  spRenderWindow);
 		void Render(const std::shared_ptr<MnRenderableSFML>& spRenderable);
 
 	private:
-		sf::RenderWindow* m_pRenderWindow;
+		std::shared_ptr<sf::RenderWindow> m_spRenderWindow;
 	};
 
 	class MnRenderModuleSFML : public MnRenderModule
@@ -34,6 +34,10 @@ namespace MNL
 		MnRenderModuleSFML();
 
 	public:
+		void OnRegistered() override;
+		void OnUnregistering() override;
+		void Update() override;
+
 		void SetRenderer(const std::shared_ptr<MnRendererSFML>& spRenderer);
 		void AddQueue(const std::shared_ptr<MnRenderable>& spRenderable) override;
 		void Render() override;

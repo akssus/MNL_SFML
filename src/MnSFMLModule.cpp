@@ -13,6 +13,14 @@ MnSFMLModule::~MnSFMLModule()
 {
 }
 
+void MnSFMLModule::Update()
+{
+}
+
+void MnSFMLModule::OnUnregistering()
+{
+}
+
 void MnSFMLModule::OnRegistered()
 {
 	_CreateWindow(m_windowWidth, m_windowHeight, m_title);

@@ -44,6 +44,10 @@ namespace MNL
 		MnInputModule() = default;
 		virtual ~MnInputModule() = default;
 
+		void OnRegistered() override;
+		void OnUnregistering() override;
+		void Update() override;
+
 		void Register(const std::string& keyName, uint32_t keyCode);
 		void Unregister(const std::string& keyName);
 

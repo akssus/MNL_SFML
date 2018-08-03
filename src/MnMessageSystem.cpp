@@ -40,7 +40,10 @@ void MnMessageSystem::Register(const std::string& msgKey, const std::shared_ptr<
 	if (spMessageReceiver != nullptr)
 	{
 		_AssureMessageBucket(msgKey);
-		bool isRegistered = std::any_of(m_tblReceivers[msgKey].begin(), m_tblReceivers[msgKey].end(), spMessageReceiver);
+		bool isRegistered = std::any_of(m_tblReceivers[msgKey].begin(), m_tblReceivers[msgKey].end(), [&](std::shared_ptr<MnMessageReceiver> receiver)
+		{
+			return receiver == spMessageReceiver;
+		});
 		if (!isRegistered)
 		{
 			m_tblReceivers[msgKey].push_back(spMessageReceiver);

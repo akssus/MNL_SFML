@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include <memory>
 #include <map>
 #include "MnGameSystemModule.h"
@@ -7,7 +6,6 @@
 #include "MnBootstrap.h"
 #include "MnIdentifierAllocator.h"
 #include "MnMessageSystem.h"
-
 
 #define MN_GAMESYSTEM_MODULE_ID_RANGE_FROM 0
 #define MN_GAMESYSTEM_MODULE_ID_RANGE_TO 5000
@@ -67,7 +65,8 @@ namespace MNL
 
 	protected:
 		std::shared_ptr<MnBootstrap> m_spBootstrap;
-		std::map<std::string, std::shared_ptr<MnGameSystemModule> > m_lstModules;
+		std::map<std::string, MnUINT32_ID> m_lstModuleIDs;
+		std::map <MnUINT32_ID, std::shared_ptr<MnGameSystemModule>,std::less<>> m_lstModules;
 		MnMessageSystem m_messageSystem;
 
 		MnIdentifierAllocator m_orderAllocator;

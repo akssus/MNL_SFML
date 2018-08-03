@@ -1,5 +1,6 @@
 #include "MnGameSystem.h"
 #include <algorithm>
+#include "MnDebugModule.h"
 
 using namespace MNL;
 
@@ -17,7 +18,7 @@ bool MnGameSystem::Boot()
 {
 	if(m_spBootstrap != nullptr)
 	{
-		m_spBootstrap->RegisterModules();
+		m_spBootstrap->RegisterModules(*this);
 
 		return true;
 	}
@@ -30,15 +31,17 @@ bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule, 
 
 	if(m_orderAllocator.IsFull())
 	{
-		//DebugLogger.Print("더이상 할당될 수 있는 모듈 자리가 없습니다")
+		MnDebug::WriteLog("더 이상 할당될 수 있는 모듈 자리가 없습니다", MN_LOGTYPE_ERROR);
 		return false;
 	}
 
 	const std::string moduleClassName = typeid(*spModule).raw_name();
-	m_lstModules[moduleClassName] = spModule;
 
 	auto allocatedOrder = m_orderAllocator.AllocateAbove(moduleOrderMin);
 	spModule->SetModuleOrder(allocatedOrder);
+
+	m_lstModuleIDs[moduleClassName] = allocatedOrder;
+	m_lstModules[allocatedOrder] = spModule;
 
 	_SortModules();
 
@@ -49,12 +52,14 @@ bool MnGameSystem::RegisterModule(std::shared_ptr<MnGameSystemModule> spModule, 
 
 bool MnGameSystem::UnregisterModule(const std::string & moduleName)
 {
-	auto it = m_lstModules.find(moduleName);
-	if (it != m_lstModules.end())
+	auto it = m_lstModuleIDs.find(moduleName);
+	if (it != m_lstModuleIDs.end())
 	{
-		it->second->OnUnregistering();
+		auto moduleID = it->second;
+		m_lstModules[moduleID]->OnUnregistering();
 
-		m_lstModules.erase(it);
+		m_lstModules.erase(moduleID);
+		m_lstModuleIDs.erase(moduleName);
 		return true;
 	}
 	return false;
@@ -70,10 +75,11 @@ bool MnGameSystem::UnregisterModule(std::shared_ptr<MnGameSystemModule> spModule
 
 std::shared_ptr<MnGameSystemModule> MnGameSystem::GetModule(const std::string & moduleName)
 {
-	auto it = m_lstModules.find(moduleName);
-	if (it != m_lstModules.end())
+	auto it = m_lstModuleIDs.find(moduleName);
+	if (it != m_lstModuleIDs.end())
 	{
-		return it->second;
+		auto moduleID = it->second;
+		return m_lstModules[moduleID];
 	}
 	return std::shared_ptr<MnGameSystemModule>();
 }
@@ -113,15 +119,11 @@ void MnGameSystem::_FreeAllModules()
 		it->second->OnUnregistering();
 	}
 	m_lstModules.clear();
+	m_lstModuleIDs.clear();
 }
 
 void MnGameSystem::_SortModules()
 {
-	auto comp = [](std::pair<std::string, std::shared_ptr<MnGameSystemModule>>& keyA, std::pair<std::string, std::shared_ptr<MnGameSystemModule>>& keyB)
-	{
-		auto spModuleA = keyA.second;
-		auto spModuleB = keyB.second;
-		return spModuleA->GetModuleOrder() > spModuleB->GetModuleOrder();
-	};
-	std::sort(m_lstModules.begin(), m_lstModules.end(), comp);
+	//이미 오름순으로 되어있어서 할필요없다
+	//그리고 map을 sort하면 에러나더라 ㅅㅂ
 }

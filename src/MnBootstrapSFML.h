@@ -12,6 +12,6 @@ namespace MNL
 	class MnBootstrapSFML : public MnBootstrap
 	{
 	public:
-		void RegisterModules() override;
+		void RegisterModules(MnGameSystem& gameSystem) override;
 	};
 }

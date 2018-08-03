@@ -16,9 +16,6 @@
     <Filter Include="외부라이브러리">
       <UniqueIdentifier>{b3074d0f-dac2-4ba8-aa89-9c4f0131c09f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="외부라이브러리\zip_utils">
-      <UniqueIdentifier>{d327872d-1ce7-4da9-b9b1-734ef84ba97a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="외부라이브러리\jsonnlohmann">
       <UniqueIdentifier>{fc9b9733-16bd-40d4-87d4-2e2394bddebb}</UniqueIdentifier>
     </Filter>
@@ -55,35 +52,17 @@
     <Filter Include="Visual\Components">
       <UniqueIdentifier>{0af23913-484e-4b33-b5c2-5b066f1b8abc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{a7d9b138-9df5-459c-9a39-3fbc628dd36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{4988848a-da3c-4477-8c26-3431d8455246}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ResourceManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\zip_utils\unzip.cpp">
-      <Filter>외부라이브러리\zip_utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\zip_utils\zip.cpp">
-      <Filter>외부라이브러리\zip_utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AnimatedSprite.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SoundManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleSystem.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\MnGameSystem.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -98,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="src\MnRenderModuleSFML.cpp">
       <Filter>Modules\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MnSprite.cpp">
-      <Filter>Visual</Filter>
     </ClCompile>
     <ClCompile Include="src\MnBootstrapSFML.cpp">
       <Filter>Core</Filter>
@@ -132,37 +108,25 @@
     <ClCompile Include="src\MnDebugModule.cpp">
       <Filter>Modules\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="src\MnMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
     <ClCompile Include="src\Transform.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Visual\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MnSprite.cpp">
+      <Filter>Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite.cpp">
+      <Filter>Visual\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\SpriteManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResourceManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\zip_utils\unzip.h">
-      <Filter>외부라이브러리\zip_utils</Filter>
-    </ClInclude>
-    <ClInclude Include="src\zip_utils\zip.h">
-      <Filter>외부라이브러리\zip_utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\jsonnlohmann\json.hpp">
       <Filter>외부라이브러리\jsonnlohmann</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimatedSprite.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SoundManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleSystem.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleManager.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\MnGameSystemModule.h">
       <Filter>Core</Filter>
@@ -184,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="src\MnRenderModuleSFML.h">
       <Filter>Modules\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MnSprite.h">
-      <Filter>Visual</Filter>
     </ClInclude>
     <ClInclude Include="src\MnBootstrapSFML.h">
       <Filter>Core</Filter>
@@ -215,11 +176,20 @@
     <ClInclude Include="src\MnDebugModule.h">
       <Filter>Modules\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="src\Position.h">
-      <Filter>Visual\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\Transform.h">
       <Filter>Visual\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MnSprite.h">
+      <Filter>Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite.h">
+      <Filter>Visual\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectFactory.h">
+      <Filter>Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,18 @@ MnGameSystemModule::~MnGameSystemModule()
 	_UnregisterSelf();
 }
 
+void MnGameSystemModule::OnRegistered()
+{
+}
+
+void MnGameSystemModule::OnUnregistering()
+{
+}
+
+void MnGameSystemModule::Update()
+{
+}
+
 std::shared_ptr<MnMessageReceiver> MnGameSystemModule::GetMessageReceiver()
 {
 	return m_spMessageReceiver;
@@ -25,7 +37,7 @@ void MnGameSystemModule::SetModuleOrder(int32_t order)
 	m_moduleOrder = order;
 }
 
-int32_t MnGameSystemModule::GetModuleOrder()
+int32_t MnGameSystemModule::GetModuleOrder() const
 {
 	return m_moduleOrder;
 }

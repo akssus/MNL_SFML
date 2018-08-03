@@ -59,7 +59,7 @@ void MnUpdatableContainer::SetOrder(const MnUINT32_ID& order)
 
 MnGameUpdateModule::MnGameUpdateModule() : m_idAllocator(0,5000), m_orderAllocator(0,5000)
 {
-	m_lstUpdatables.reserve(m_orderAllocator.PoolSize());
+	m_lstUpdatableContainers.reserve(m_orderAllocator.PoolSize());
 }
 
 void MnGameUpdateModule::Update()
@@ -81,25 +81,28 @@ void MnGameUpdateModule::Add(const std::shared_ptr<MnUpdatable>& spUpdatable, Mn
 	}
 
 	MnUpdatableContainer container(spUpdatable, id, order);
-	m_lstUpdatables.push_back(container);
+	m_lstUpdatableContainers.push_back(container);
 }
 
 void MnGameUpdateModule::Remove(const std::shared_ptr<MnUpdatable>& spUpdatable)
 {
-	std::remove(m_lstUpdatables.begin(), m_lstUpdatables.end(), spUpdatable);
+	std::remove_if(m_lstUpdatableContainers.begin(), m_lstUpdatableContainers.end(), [&](MnUpdatableContainer& container)
+	{
+		return spUpdatable == container.Updatable();
+	});
 }
 
 void MnGameUpdateModule::Remove(const MnUINT32_ID& id)
 {
-	std::remove_if(m_lstUpdatables.begin(),m_lstUpdatables.end(),[&](MnUpdatableContainer& updatable)
+	std::remove_if(m_lstUpdatableContainers.begin(), m_lstUpdatableContainers.end(),[&](MnUpdatableContainer& container)
 	{
-		return updatable.ID() == id;
+		return id == container.ID();
 	});
 }
 
 void MnGameUpdateModule::_PreUpdate()
 {
-	for (auto& obj : m_lstUpdatables)
+	for (auto& obj : m_lstUpdatableContainers)
 	{
 		obj.Updatable()->PreUpdate();
 	}
@@ -107,7 +110,7 @@ void MnGameUpdateModule::_PreUpdate()
 
 void MnGameUpdateModule::_Update()
 {
-	for (auto& obj : m_lstUpdatables)
+	for (auto& obj : m_lstUpdatableContainers)
 	{
 		obj.Updatable()->Update();
 	}
@@ -115,7 +118,7 @@ void MnGameUpdateModule::_Update()
 
 void MnGameUpdateModule::_PostUpdate()
 {
-	for (auto& obj : m_lstUpdatables)
+	for (auto& obj : m_lstUpdatableContainers)
 	{
 		obj.Updatable()->PostUpdate();
 	}
@@ -123,7 +126,7 @@ void MnGameUpdateModule::_PostUpdate()
 
 void MnGameUpdateModule::_SortOrder()
 {
-	std::sort(m_lstUpdatables.begin(), m_lstUpdatables.end(), [](MnUpdatableContainer& updatableA, MnUpdatableContainer& updatableB)
+	std::sort(m_lstUpdatableContainers.begin(), m_lstUpdatableContainers.end(), [](MnUpdatableContainer& updatableA, MnUpdatableContainer& updatableB)
 	{
 		//오름순 정렬
 		return updatableA.Order() < updatableB.Order();

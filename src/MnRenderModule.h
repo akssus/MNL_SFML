@@ -20,7 +20,7 @@ namespace MNL
 	{
 	public:
 		virtual ~MnRenderer() = default;
-		virtual void Render(const std::shared_ptr<MnRenderable>& spRenderable) = 0;
+		virtual void Render(const std::shared_ptr<MnRenderable>& spRenderable);
 	};
 
 	class MnRenderModule : public MnGameSystemModule
@@ -33,4 +33,5 @@ namespace MNL
 		virtual void Render() = 0;
 
 	};
+
 }
